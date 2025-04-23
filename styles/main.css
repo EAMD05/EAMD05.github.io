@@ -173,7 +173,7 @@ body {
     font-size: 0.875rem;
 }
 
-/* Estilos simplificados para el botón de menú */
+/* Estilos del botón hamburguesa */
 .menu-toggle {
     display: none;
     background: none;
@@ -183,27 +183,56 @@ body {
     bottom: 2rem;
     right: 2rem;
     z-index: 1001;
-    padding: 0;
-    font-size: 1.8rem;
-    color: #6C757D;
-    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6C757D;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Manejo de los íconos */
-.menu-toggle .fa-times {
-    display: none;
+.hamburger {
+    width: 24px;
+    height: 2px;
+    background: white;
+    position: relative;
+    transition: all 0.3s ease-in-out;
 }
 
-.menu-toggle .fa-bars {
-    display: block;
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: white;
+    left: 0;
+    transition: all 0.3s ease-in-out;
 }
 
-.menu-toggle.active .fa-times {
-    display: block;
+.hamburger::before {
+    top: -8px;
 }
 
-.menu-toggle.active .fa-bars {
-    display: none;
+.hamburger::after {
+    top: 8px;
+}
+
+/* Animación del botón hamburguesa */
+.menu-toggle.active .hamburger {
+    background: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
 }
 
 /* Media query para móvil */
