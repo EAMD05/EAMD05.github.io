@@ -90,9 +90,9 @@ body {
 .main-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 3rem 5% 2rem 5%;
+    padding: 1rem 5% 2rem 5%;
     min-height: calc(100vh - 80px);
-    margin-top: 95px; /* Ajustado para compensar la navbar más alta */
+    margin-top: 75px; /* Reducido de 95px */
 }
 
 /* Footer styles */
