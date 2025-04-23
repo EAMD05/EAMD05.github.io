@@ -28,6 +28,7 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     position: relative;
     transition: transform 0.3s ease;
+    aspect-ratio: 1/1;
 }
 
 .profile-image:hover {
@@ -887,15 +888,18 @@ h2 {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .profile-image {
+        flex: 0 0 280px;
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+
     .profile-container {
         flex-direction: column;
         text-align: center;
         gap: 2rem;
-    }
-
-    .profile-image {
-        flex: 0 0 250px;
-        height: 250px;
+        padding: 1rem;
     }
 
     .profile-info h1 {
@@ -1037,7 +1041,16 @@ h2 {
     .industry-focus {
         grid-template-columns: 1fr;
     }
-} 
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 320px) {
+    .profile-image {
+        flex: 0 0 250px;
+        width: 250px;
+        height: 250px;
+    }
+}
 
 /* Estilos específicos para LEAD */
 .project-item:first-of-type .project-header {
