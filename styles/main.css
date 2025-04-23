@@ -173,21 +173,75 @@ body {
     font-size: 0.875rem;
 }
 
-/* Responsive */
+/* Estilos del botón de menú */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Media queries actualizados para móvil */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        padding: 1rem;
+        flex-direction: row; /* Volvemos a horizontal para la barra principal */
+        padding: 1rem 5%;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px; /* Altura fija para la barra */
+    }
+
+    .menu-toggle {
+        display: block;
     }
 
     .nav-links {
-        margin: 1rem 0;
-        flex-wrap: wrap;
-        justify-content: center;
+        position: fixed;
+        top: 60px; /* Igual a la altura de la navbar */
+        left: 0;
+        width: 100%;
+        background-color: #6C757D;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .nav-buttons {
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
         width: 100%;
-        justify-content: center;
+        text-align: center;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Ajustamos el margen superior del contenido principal */
+    .main-content {
+        margin-top: 60px;
+    }
+
+    /* Ajustamos el scroll-padding-top */
+    html {
+        scroll-padding-top: 70px;
     }
 } 
