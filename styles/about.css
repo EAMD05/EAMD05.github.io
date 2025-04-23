@@ -5,7 +5,7 @@
     background: linear-gradient(135deg, #f8f9fa, #ffffff);
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    min-height: 75vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
 }
@@ -888,18 +888,15 @@ h2 {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .profile-image {
-        flex: 0 0 280px;
-        width: 280px;
-        height: 280px;
-        margin: 0 auto;
-    }
-
     .profile-container {
         flex-direction: column;
         text-align: center;
         gap: 2rem;
-        padding: 1rem;
+    }
+
+    .profile-image {
+        flex: 0 0 250px;
+        height: 250px;
     }
 
     .profile-info h1 {
@@ -1041,16 +1038,12 @@ h2 {
     .industry-focus {
         grid-template-columns: 1fr;
     }
-}
 
-/* Media query para pantallas muy pequeñas */
-@media (max-width: 320px) {
-    .profile-image {
-        flex: 0 0 250px;
-        width: 250px;
-        height: 250px;
+    .profile-section {
+        padding: 2rem 0 8rem 0;
+        min-height: auto;
     }
-}
+} 
 
 /* Estilos específicos para LEAD */
 .project-item:first-of-type .project-header {
