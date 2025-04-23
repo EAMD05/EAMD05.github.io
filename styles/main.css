@@ -179,7 +179,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 1rem;
+    padding: 0;
     position: relative;
     z-index: 1001;
     width: 50px;
@@ -190,8 +190,10 @@ body {
 }
 
 .hamburger {
-    position: relative;
-    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 24px;
     height: 2px;
     background: white;
@@ -202,6 +204,7 @@ body {
 .hamburger::after {
     content: '';
     position: absolute;
+    left: 0;
     width: 24px;
     height: 2px;
     background: white;
@@ -209,11 +212,11 @@ body {
 }
 
 .hamburger::before {
-    transform: translateY(-8px);
+    top: -8px;
 }
 
 .hamburger::after {
-    transform: translateY(8px);
+    top: 8px;
 }
 
 /* Animación del botón hamburguesa */
@@ -222,10 +225,12 @@ body {
 }
 
 .menu-toggle.active .hamburger::before {
+    top: 0;
     transform: rotate(45deg);
 }
 
 .menu-toggle.active .hamburger::after {
+    top: 0;
     transform: rotate(-45deg);
 }
 
