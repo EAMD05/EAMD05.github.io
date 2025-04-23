@@ -606,7 +606,7 @@ h2 {
 }
 
 .mission-date {
-    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    background: linear-gradient(135deg, #9E1732, #7a1227);
     color: white;
     padding: 1rem;
     border-radius: 8px;
@@ -726,6 +726,97 @@ h2 {
 
 .destination-tags i {
     color: #0d6efd;
+}
+
+/* Estilos específicos para AdArtEm */
+.adartem-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.service-card.creative {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.service-card.creative:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-card.creative i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+.industry-focus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.industry-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.industry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.industry-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+.industry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.industry-tags span {
+    background-color: #e9ecef;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.adartem-goal {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(145deg, #f8f9fa, #ffffff);
+    border-radius: 12px;
+    border-left: 4px solid #495057;
+}
+
+.adartem-goal h4 {
+    color: #212529;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.adartem-goal i {
+    color: #495057;
 }
 
 /* Responsive */
@@ -858,4 +949,196 @@ h2 {
     .destination-tags {
         justify-content: center;
     }
+
+    .adartem-services {
+        grid-template-columns: 1fr;
+    }
+    
+    .industry-focus {
+        grid-template-columns: 1fr;
+    }
 } 
+
+/* Estilos específicos para LEAD */
+.project-item:first-of-type .project-header {
+    border-left: 4px solid #9E1732;
+    padding-left: 1rem;
+}
+
+.project-item:first-of-type .highlight-title {
+    background-color: #9E1732;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+/* Estilos específicos para el contenedor de fecha en LEAD */
+.project-item:first-of-type .mission-header .mission-date {
+    background-color: #9E1732 !important; /* Aseguramos que este color tenga prioridad */
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.project-item:first-of-type .mission-header .mission-date .month,
+.project-item:first-of-type .mission-header .mission-date .year {
+    color: white;
+    display: block;
+    font-weight: 600;
+}
+
+/* Aseguramos que no haya otros estilos que puedan estar sobrescribiendo */
+.project-item:first-of-type .mission-container .mission-header .mission-date {
+    background-color: #9E1732 !important;
+}
+
+/* Resto de los estilos LEAD */
+.project-item:first-of-type .destination-tags i,
+.project-item:first-of-type .destination-icon i,
+.project-item:first-of-type .project-contact i {
+    color: #9E1732;
+}
+
+.project-item:first-of-type .destination-tags span {
+    background-color: rgba(158, 23, 50, 0.1);
+    color: #9E1732;
+    border: 1px solid rgba(158, 23, 50, 0.2);
+}
+
+.project-item:first-of-type .connection-line {
+    background: linear-gradient(to bottom, #9E1732, #9E1732);
+}
+
+.project-item:first-of-type .project-contact a {
+    color: #9E1732;
+    transition: color 0.3s ease;
+}
+
+.project-item:first-of-type .project-contact a:hover {
+    color: #7a1227;
+}
+
+.project-item:first-of-type b {
+    color: #9E1732;
+}
+
+.project-item:first-of-type .destination-info h5 {
+    color: #9E1732;
+}
+
+.project-item:first-of-type .fa-industry,
+.project-item:first-of-type .fa-robot,
+.project-item:first-of-type .fa-microchip,
+.project-item:first-of-type .fa-mobile-alt,
+.project-item:first-of-type .fa-chart-line {
+    color: #9E1732;
+}
+
+/* Estilos específicos para COPARMEX (segundo proyecto) */
+.project-item:nth-of-type(2) .project-header {
+    border-left: 4px solid #023C87;
+    padding-left: 1rem;
+}
+
+.project-item:nth-of-type(2) .highlight-title {
+    background-color: #023C87;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.project-item:nth-of-type(2) .event-date {
+    background: linear-gradient(135deg, #023C87, #012960); /* Del azul corporativo a un azul más oscuro */
+    color: white;
+}
+
+.project-item:nth-of-type(2) .event-info h4 i {
+    color: #023C87;
+}
+
+.project-item:nth-of-type(2) .event-stats span {
+    background-color: rgba(2, 60, 135, 0.1);
+    color: #023C87;
+    border: 1px solid rgba(2, 60, 135, 0.2);
+}
+
+.project-item:nth-of-type(2) .project-contact a {
+    color: #023C87;
+    transition: color 0.3s ease;
+}
+
+.project-item:nth-of-type(2) .project-contact a:hover {
+    color: #012960;
+}
+
+.project-item:nth-of-type(2) b {
+    color: #023C87;
+}
+
+.project-item:nth-of-type(2) .event-location i {
+    color: #023C87;
+}
+
+.project-item:nth-of-type(2) .event-stats i {
+    color: #023C87;
+}
+
+/* Estilos para las fechas en las tarjetas de eventos de COPARMEX */
+.project-item:nth-of-type(2) .event-date .month {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.project-item:nth-of-type(2) .event-date .day {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.2rem 0;
+}
+
+.project-item:nth-of-type(2) .event-date .year {
+    color: rgba(255, 255, 255, 0.8); /* Un blanco ligeramente transparente */
+    font-size: 1.2rem;
+    margin-top: 0.3rem;
+}
+
+/* Estilos específicos para END TO END (tercer proyecto) */
+.project-item:nth-of-type(3) .project-header {
+    border-left: 4px solid #05275C;
+    padding-left: 1rem;
+}
+
+/* Íconos en las tarjetas de servicios */
+.project-item:nth-of-type(3) .service-card i {
+    color: #05275C;
+}
+
+/* Título de la sección de servicios */
+.project-item:nth-of-type(3) .highlight-title {
+    background-color: #05275C;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+/* Enlaces de contacto */
+.project-item:nth-of-type(3) .project-contact a {
+    color: #05275C;
+    transition: color 0.3s ease;
+}
+
+.project-item:nth-of-type(3) .project-contact a:hover {
+    color: #041d44; /* Versión más oscura para hover */
+}
+
+.project-item:nth-of-type(3) .project-contact i {
+    color: #05275C;
+}
+
+/* Texto en negrita */
+.project-item:nth-of-type(3) b {
+    color: #05275C;
+}

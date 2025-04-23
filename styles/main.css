@@ -1,4 +1,9 @@
 /* Estilos generales */
+html {
+    scroll-behavior: smooth; /* Para un scroll suave */
+    scroll-padding-top: 110px; /* Ajusta este valor según el alto de tu navbar */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,19 +17,22 @@ body {
 
 /* Estilos del Navbar */
 .navbar {
-    background-color: #212529;
-    padding: 1rem 5%;
+    background-color: #6C757D;
+    padding: 1.5rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.2);
 }
 
 .name {
-    color: #F8F9FA;
-    font-size: 1.2rem;
+    color: #FFFFFF;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
@@ -34,15 +42,15 @@ body {
 }
 
 .nav-links a {
-    color: #E9ECEF;
+    color: #F8F9FA;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #F8F9FA;
+    color: #FFFFFF;
 }
 
 .nav-buttons {
@@ -84,6 +92,7 @@ body {
     margin: 0 auto;
     padding: 3rem 5% 2rem 5%;
     min-height: calc(100vh - 80px);
+    margin-top: 95px; /* Ajustado para compensar la navbar más alta */
 }
 
 /* Footer styles */
