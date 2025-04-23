@@ -1043,6 +1043,73 @@ h2 {
         padding: 2rem 0 8rem 0;
         min-height: auto;
     }
+
+    /* Estilos específicos para la sección de destinos de LEAD */
+    .project-item:first-of-type .mission-route {
+        padding: 1rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .project-item:first-of-type .destination-card {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        border: 1px solid rgba(158, 23, 50, 0.1);
+    }
+
+    .project-item:first-of-type .destination-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+        background: #fff;
+        border: 2px solid rgba(158, 23, 50, 0.2);
+    }
+
+    .project-item:first-of-type .destination-icon i {
+        font-size: 1.8rem;
+    }
+
+    .project-item:first-of-type .connection-line {
+        left: 50%;
+        height: 30px;
+        background: linear-gradient(to bottom, #9E1732, #9E1732);
+        width: 2px;
+    }
+
+    .project-item:first-of-type .destination-info h5 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        color: #9E1732;
+    }
+
+    .project-item:first-of-type .destination-info p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #495057;
+    }
+
+    .project-item:first-of-type .destination-tags {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .project-item:first-of-type .destination-tags span {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        background: rgba(158, 23, 50, 0.05);
+        border: 1px solid rgba(158, 23, 50, 0.1);
+        color: #9E1732;
+    }
+
+    .project-item:first-of-type .destination-tags i {
+        font-size: 1.1rem;
+    }
 } 
 
 /* Estilos específicos para LEAD */
