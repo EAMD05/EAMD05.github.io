@@ -173,37 +173,19 @@ body {
     font-size: 0.875rem;
 }
 
-/* Estilos del botón de menú */
+/* Por defecto, el botón está oculto */
 .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: #495057;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-    z-index: 1001;
+    display: none; /* Esto asegura que el botón esté oculto en pantallas grandes */
 }
 
-.menu-toggle:hover {
-    background-color: #404850;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
+/* Estado normal */
 .hamburger {
     position: relative;
     display: block;
-    width: 20px;
-    height: 2px;
+    width: 22px;
+    height: 1.5px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.95);
     transition: all 0.3s ease-in-out;
 }
 
@@ -211,35 +193,42 @@ body {
 .hamburger::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 2px;
-    background: rgba(255,255,255,0.9);
+    width: 22px;
+    height: 1.5px;
+    background: rgba(255,255,255,0.95);
     transition: all 0.3s ease-in-out;
+    left: 0;
 }
 
 .hamburger::before {
-    transform: translateY(-6px);
+    transform: translateY(-7px);
+    width: 16px;
+    right: 0;
+    left: auto;
 }
 
 .hamburger::after {
-    transform: translateY(6px);
+    transform: translateY(7px);
+    width: 16px;
+    left: 0;
 }
 
-/* Animación del botón hamburguesa */
-.menu-toggle.active {
-    background-color: #404850;
-}
-
+/* Animación cuando está activo */
 .menu-toggle.active .hamburger {
     background: transparent;
 }
 
 .menu-toggle.active .hamburger::before {
-    transform: rotate(45deg);
+    width: 22px;
+    transform: translate(0, 0) rotate(45deg);
+    right: auto;
+    left: 0;
 }
 
 .menu-toggle.active .hamburger::after {
-    transform: rotate(-45deg);
+    width: 22px;
+    transform: translate(0, 0) rotate(-45deg);
+    left: 0;
 }
 
 /* Media queries actualizados para móvil */
@@ -254,28 +243,44 @@ body {
     }
 
     .menu-toggle {
-        display: flex;
+        display: flex; /* Solo aquí se muestra el botón */
         align-items: center;
         justify-content: center;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: #495057;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        z-index: 1001;
     }
 
     .nav-links {
         position: fixed;
         bottom: calc(2rem + 60px);
         right: 2rem;
-        background-color: #495057;
+        background: rgba(73, 80, 87, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         padding: 1rem;
-        border-radius: 12px;
+        border-radius: 16px;
         flex-direction: column;
         gap: 0.5rem;
         transform: scale(0);
         transform-origin: bottom right;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         width: auto;
-        min-width: 200px;
+        min-width: 220px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .nav-links.active {
@@ -286,15 +291,64 @@ body {
 
     .nav-links a {
         color: white;
-        padding: 0.8rem 1.5rem;
+        padding: 0.9rem 1.5rem;
         width: 100%;
         text-align: left;
-        border-radius: 8px;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+        transition: all 0.2s ease;
+        position: relative;
+        background: rgba(255, 255, 255, 0.03);
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: white;
+        border-radius: 4px;
+        opacity: 0;
+        transform: translateX(-5px);
         transition: all 0.2s ease;
     }
 
     .nav-links a:hover {
-        background-color: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+    }
+
+    .nav-links a:hover::before {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Animación de entrada para cada enlace */
+    .nav-links.active a {
+        animation: slideIn 0.3s ease forwards;
+        opacity: 0;
+    }
+
+    .nav-links.active a:nth-child(1) { animation-delay: 0.1s; }
+    .nav-links.active a:nth-child(2) { animation-delay: 0.2s; }
+    .nav-links.active a:nth-child(3) { animation-delay: 0.3s; }
+    .nav-links.active a:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     /* Ajustamos el margen superior del contenido principal */

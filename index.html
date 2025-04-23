@@ -61,6 +61,7 @@
             <div class="project-item">
                 <div class="project-header">
                     <h3>LEAD – Leaders in Entrepreneurial and Academic Development</h3>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="project-content">
                     <p>LEAD es un grupo estudiantil que impulsa la conexión entre jóvenes universitarios y el ecosistema 
@@ -70,14 +71,15 @@
                         empresas y embajadas para generar sinergias de beneficios bilaterales.<br><br>
 
                         <b>¿Por qué apoyar?</b>
-                        <br>Buscamos patrocinadores que quieran financiar becas para estudiantes sobresalientes. Las empresas 
+                        Buscamos patrocinadores que quieran financiar becas para estudiantes sobresalientes. Las empresas 
                         patrocinadoras pueden enviar a un estudiante a buscar información, oportunidades, soluciones o alianzas 
                         específicas en Asia, representando sus intereses con el respaldo de LEAD. Es una forma directa de 
                         apoyar el talento joven y obtener conexiones internacionales a bajo costo.<br><br>
                         
                         <b>Misión Pasada:</b>
                         
-                        <br>Invierno 2025: Hong Kong, Camboya, Malasia y Singapur</p>
+                        Invierno 2025: Hong Kong, Camboya, Malasia y Singapur
+                    </p>
 
                     
                     <div class="project-highlights">
@@ -156,6 +158,7 @@
             <div class="project-item">
                 <div class="project-header">
                     <h3>COPARMEX Universitario – Campus Santa Fe</h3>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="project-content">
                     <p>COPARMEX es la Confederación Patronal de la República Mexicana, una institución empresarial con fuerte 
@@ -234,13 +237,14 @@
             <div class="project-item">
                 <div class="project-header">
                     <h3>END TO END Management</h3>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="project-content">
                     <p>END TO END es una empresa mexicana con más de 15 años de experiencia en el mercado, dedicada a ofrecer 
                         soluciones tecnológicas integrales que impulsan la transformación digital y la eficiencia operativa de 
                         sus clientes. A lo largo de su trayectoria, se ha consolidado como un proveedor de servicios confiable para 
                         empresas de distintos tamaños e industrias, destacando principalmente en los sectores de: <b>manufactura, 
-                        petróleo, energía, gas, banca, agroindustria, retail y alimentos y bebidas.</b>.<br><br>
+                        petróleo, energía, gas, banca, agroindustria, retail y alimentos y bebidas.</b><br>
 
                         Con un equipo de expertos certificados, atención personalizada y visión a largo plazo, en END TO END no 
                         solo brindamos servicios: construimos relaciones sólidas que acompañan el crecimiento de cada empresa.
@@ -311,6 +315,7 @@
             <div class="project-item">
                 <div class="project-header">
                     <h3>AdArtEm – Imagen Personal para el Mundo Digital</h3>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="project-content">
                     <p>Co-fundador de una firma dedicada a la curaduría y proyección de imagen personal en entornos digitales. 
@@ -384,7 +389,6 @@
         <!-- Sección de Habilidades -->
         <section class="skills-section" id="habilidades">
             <h2>Habilidades y Competencias</h2>
-            <p class="section-intro">Mis principales habilidades y competencias.</p>
             
             <div class="skills-container">
                 <div class="skills-list">
@@ -415,7 +419,6 @@
         <!-- Sección de Educación -->
         <section class="education-section" id="educacion">
             <h2>Educación</h2>
-            <p class="section-intro">Mi trayectoria educativa ha estado marcada por programas de excelencia y un enfoque internacional.</p>
             
             <table class="education-table">
                 <thead>
@@ -460,7 +463,6 @@
         <!-- Sección de Logros -->
         <section class="achievements-section" id="logros">
             <h2>Logros y Experiencias</h2>
-            <p class="section-intro">A lo largo de mi <u>trayectoria</u>, he tenido la oportunidad de participar en diversos <u>proyectos</u> y <u>experiencias</u> que han contribuido a mi desarrollo <u>profesional</u> y <u>personal</u>.</p>
             
             <div class="achievements-grid">
                 <!-- Logro 1 - Diploma IB -->
@@ -562,5 +564,56 @@
 
     <!-- Eliminar el script inline y añadir esta línea antes del cierre del body -->
     <script src="scripts/nav.js"></script>
+
+    <!-- Al final del body, justo antes de cerrar </body> -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los project-header
+        const projectHeaders = document.querySelectorAll('.project-header');
+        
+        // Inicialmente ocultar todos los contenidos
+        document.querySelectorAll('.project-content').forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Agregar el evento click a cada header
+        projectHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                // Obtener el contenido asociado (siguiente elemento hermano)
+                const content = this.nextElementSibling;
+                
+                // Contraer todos los demás proyectos
+                projectHeaders.forEach(otherHeader => {
+                    if (otherHeader !== this) {
+                        const otherContent = otherHeader.nextElementSibling;
+                        otherContent.style.display = 'none';
+                        otherHeader.classList.remove('active');
+                        const otherIcon = otherHeader.querySelector('i');
+                        otherIcon.style.transform = 'rotate(0)';
+                    }
+                });
+                
+                // Toggle la visibilidad del proyecto clickeado
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'block';
+                    this.classList.add('active');
+                    
+                    // Hacer scroll suave hasta el proyecto
+                    this.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    content.style.display = 'none';
+                    this.classList.remove('active');
+                }
+                
+                // Rotar el ícono
+                const icon = this.querySelector('i');
+                icon.style.transform = content.style.display === 'block' ? 'rotate(180deg)' : 'rotate(0)';
+            });
+        });
+    });
+    </script>
 </body>
 </html> 
