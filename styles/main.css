@@ -173,68 +173,40 @@ body {
     font-size: 0.875rem;
 }
 
-/* Estilos del botón de menú */
+/* Estilos simplificados para el botón de menú */
 .menu-toggle {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
-    position: relative;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
     z-index: 1001;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #6C757D;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    padding: 0;
+    font-size: 1.8rem;
+    color: #6C757D;
+    transition: all 0.3s ease;
 }
 
-.hamburger {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 2px;
-    background: white;
-    transition: all 0.3s ease-in-out;
+/* Manejo de los íconos */
+.menu-toggle .fa-times {
+    display: none;
 }
 
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 24px;
-    height: 2px;
-    background: white;
-    transition: all 0.3s ease-in-out;
+.menu-toggle .fa-bars {
+    display: block;
 }
 
-.hamburger::before {
-    top: -8px;
+.menu-toggle.active .fa-times {
+    display: block;
 }
 
-.hamburger::after {
-    top: 8px;
+.menu-toggle.active .fa-bars {
+    display: none;
 }
 
-/* Animación del botón hamburguesa */
-.menu-toggle.active .hamburger {
-    background: transparent;
-}
-
-.menu-toggle.active .hamburger::before {
-    top: 0;
-    transform: rotate(45deg);
-}
-
-.menu-toggle.active .hamburger::after {
-    top: 0;
-    transform: rotate(-45deg);
-}
-
-/* Media queries actualizados para móvil */
+/* Media query para móvil */
 @media (max-width: 768px) {
     .navbar {
         background: none;
@@ -247,14 +219,11 @@ body {
 
     .menu-toggle {
         display: block;
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
     }
 
     .nav-links {
         position: fixed;
-        bottom: calc(2rem + 60px); /* Posición arriba del botón */
+        bottom: calc(2rem + 40px);
         right: 2rem;
         background-color: #6C757D;
         padding: 1rem;
