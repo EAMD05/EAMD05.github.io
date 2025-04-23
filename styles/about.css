@@ -1,19 +1,23 @@
 /* Estilos de la sección de perfil */
 .profile-section {
-    padding: 4rem 0;
+    padding: 8rem 0;
     margin-bottom: 4rem;
-    background-color: #F8F9FA;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
 }
 
 .profile-container {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 4rem;
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
+    width: 100%;
 }
 
 .profile-image {
@@ -21,27 +25,89 @@
     height: 300px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #DEE2E6;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     position: relative;
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: translateY(-5px);
 }
 
 .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 0 0;
+    object-position: center 10%;
 }
 
 .profile-info {
     flex: 1;
 }
 
+.name-title {
+    margin-bottom: 2rem;
+}
+
 .profile-info h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #212529;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    font-weight: 700;
+    background: linear-gradient(135deg, #212529, #495057);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: #495057;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.badge i {
+    color: #0077B5;
+}
+
+.linkedin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #0077B5;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,119,181,0.2);
+}
+
+.linkedin-btn:hover {
+    background-color: #005885;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,119,181,0.3);
 }
 
 .profile-description {
@@ -358,9 +424,9 @@ h2 {
 }
 
 .project-content p {
-    color: #495057;
+    line-height: 1.75;
     margin-bottom: 1rem;
-    line-height: 1.5;
+    color: #495057;
 }
 
 .project-highlights {
@@ -824,11 +890,25 @@ h2 {
     .profile-container {
         flex-direction: column;
         text-align: center;
+        gap: 2rem;
     }
 
     .profile-image {
         flex: 0 0 250px;
         height: 250px;
+    }
+
+    .profile-info h1 {
+        font-size: 2.5rem;
+    }
+
+    .title-badges {
+        justify-content: center;
+    }
+
+    .linkedin-btn {
+        width: 100%;
+        justify-content: center;
     }
 
     .skills-container {
