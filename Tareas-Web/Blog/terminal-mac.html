@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Mac - Blog de Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="name">Erick A. M.</div>
+        <div class="nav-links">
+            <a href="blog.html">Inicio</a>
+            <a href="git-workflow.html">Git & GitHub</a>
+            <a href="terminal-mac.html">Terminal Mac</a>
+            <a href="css.html">CSS</a>
+            <a href="about.html">Sobre Mí</a>
+        </div>
+        <div class="nav-buttons">
+            <a href="../index.html" class="projects-btn">Link a Todos los Proyectos</a>
+            <a href="contact.html" class="contact-btn">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+        <h1 class="welcome-title">Terminal de Mac: Guía Completa</h1>
+        <p class="description">
+            Aprende los comandos más útiles de la Terminal de Mac para navegar, crear y gestionar archivos y directorios.
+        </p>
+
+        <!-- Artículo Principal -->
+        <article class="featured-post">
+            <h2>Navegación en la Terminal</h2>
+            <p>
+                La Terminal de Mac es una herramienta poderosa que te permite interactuar con tu sistema operativo a través de comandos.
+                Aquí te presentamos los comandos más comunes y útiles.
+            </p>
+
+            <h3>Comandos de Navegación</h3>
+            <ul>
+                <li><strong>pwd</strong> - Muestra el directorio actual</li>
+                <li><strong>ls</strong> - Lista los archivos y carpetas en el directorio actual</li>
+                <li><strong>cd [directorio]</strong> - Cambia al directorio especificado</li>
+                <li><strong>cd ..</strong> - Sube un nivel en la jerarquía de directorios</li>
+                <li><strong>cd ~</strong> - Va al directorio home del usuario</li>
+                <li><strong>clear</strong> - Limpia la pantalla de la terminal</li>
+            </ul>
+
+            <h3>Gestión de Archivos y Directorios</h3>
+            <ul>
+                <li><strong>mkdir [nombre]</strong> - Crea un nuevo directorio</li>
+                <li><strong>touch [nombre]</strong> - Crea un nuevo archivo vacío</li>
+                <li><strong>rm [archivo]</strong> - Elimina un archivo</li>
+                <li><strong>rm -r [directorio]</strong> - Elimina un directorio y su contenido</li>
+                <li><strong>cp [origen] [destino]</strong> - Copia archivos o directorios</li>
+                <li><strong>mv [origen] [destino]</strong> - Mueve o renombra archivos/directorios</li>
+            </ul>
+
+            <h3>Visualización de Contenido</h3>
+            <ul>
+                <li><strong>cat [archivo]</strong> - Muestra el contenido de un archivo</li>
+                <li><strong>less [archivo]</strong> - Muestra el contenido de un archivo con navegación</li>
+                <li><strong>head [archivo]</strong> - Muestra las primeras líneas de un archivo</li>
+                <li><strong>tail [archivo]</strong> - Muestra las últimas líneas de un archivo</li>
+            </ul>
+
+            <h3>Permisos y Propiedad</h3>
+            <ul>
+                <li><strong>chmod [permisos] [archivo]</strong> - Cambia los permisos de un archivo</li>
+                <li><strong>chown [usuario] [archivo]</strong> - Cambia el propietario de un archivo</li>
+                <li><strong>ls -l</strong> - Muestra información detallada de archivos incluyendo permisos</li>
+            </ul>
+
+            <h3>Búsqueda</h3>
+            <ul>
+                <li><strong>find [directorio] -name "[patrón]"</strong> - Busca archivos por nombre</li>
+                <li><strong>grep "[texto]" [archivo]</strong> - Busca texto dentro de archivos</li>
+                <li><strong>locate [archivo]</strong> - Busca archivos en todo el sistema</li>
+            </ul>
+
+            <h3>Procesos y Sistema</h3>
+            <ul>
+                <li><strong>ps</strong> - Muestra los procesos en ejecución</li>
+                <li><strong>top</strong> - Muestra información en tiempo real del sistema</li>
+                <li><strong>kill [PID]</strong> - Termina un proceso</li>
+            </ul>
+        </article>
+
+        <a href="blog.html" class="back-link">← Volver al Blog</a>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #F8F9FA;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #212529;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .project-card {
+            background-color: #F8F9FA;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #DEE2E6;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-card h2 {
+            color: #212529;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .project-card p {
+            color: #495057;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            background-color: #6C757D;
+            color: #F8F9FA;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis Proyectos Web</h1>
+    <div class="projects-container">
+        <div class="project-card">
+            <h2>Blog Personal</h2>
+            <p>Un blog moderno y responsive donde comparto mis pensamientos y experiencias.</p>
+            <a href="Blog/blog.html" class="project-link">Ver Blog</a>
+        </div>
+        <div class="project-card">
+            <h2>Simple Web Page</h2>
+            <p>Una pagina web simple para practicar html y css</p>
+            <a href="Simple_Web_Page/index.html" class="project-link">Ver Pagina</a>
+        </div>
+        <div class="project-card">
+            <h2>Grid Layout 1</h2>
+            <p>Layout de grid 2x3 con elementos de colores</p>
+            <a href="CSSgrid/cssgrid.html" class="project-link">Ver Grid 1</a>
+        </div>
+        <div class="project-card">
+            <h2>Grid Layout 2</h2>
+            <p>Layout de grid con 5 elementos</p>
+            <a href="CSSgrid2/cssgrid2.html" class="project-link">Ver Grid 2</a>
+        </div>
+        <div class="project-card">
+            <h2>Grid Layout 3</h2>
+            <p>Layout de grid con 5 elementos</p>
+            <a href="CSSgrid3/cssgrid3.html" class="project-link">Ver Grid 3</a>
+        </div>
+        <div class="project-card">
+            <h2>Grid Layout 4</h2>
+            <p>Layout de grid anidado con 7 elementos</p>
+            <a href="CSSgrid4/cssgrid4.html" class="project-link">Ver Grid 4</a>
+        </div>
+        <div class="project-card">
+            <h2>Coin Collector</h2>
+            <p>Un juego de plataformas donde debes recolectar monedas mientras evitas obstáculos</p>
+            <a href="CoinCollector/index.html" class="project-link">Jugar</a>
+        </div>
+    </div>
+</body>
+</html>
