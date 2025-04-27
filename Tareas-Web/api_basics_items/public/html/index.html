@@ -7,363 +7,372 @@
     <title>API Basics Items</title>
 </head>
 <body>
+    <nav class="sidebar">
+        <h2>Endpoints</h2>
+        <ul>
+            <li class="section-title">------- ITEMS -------</li>
+            <li><a href="#get-items">GET /items</a></li>
+            <li><a href="#get-item-by-id">GET /items/:id</a></li>
+            <li><a href="#post-items">POST /items</a></li>
+            <li><a href="#put-item">PUT /items/:id</a></li>
+            <li><a href="#delete-item">DELETE /items/:id</a></li>
+            <li class="section-title">------- USERS -------</li>
+            <li><a href="#get-users">GET /users</a></li>
+            <li><a href="#get-user-by-id">GET /users/:id</a></li>
+            <li><a href="#post-users">POST /users</a></li>
+            <li><a href="#put-user">PUT /users/:id</a></li>
+            <li><a href="#delete-user">DELETE /users/:id</a></li>
+        </ul>
+        <div class="view-options">
+            <h3>View Options</h3>
+            <ul>
+                <li><a href="/items-page" class="view-link">View Items Catalog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
     <h1>API Basics Items</h1>
     
     <section class="endpoint-doc">
-        <h2>Documentación de Endpoints</h2>
-        
-        <article class="endpoint">
-            <h3>GET /items</h3>
-            <p>Obtiene todos los items del catálogo.</p>
+            <h2>Endpoints Documentation</h2>
             
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Lista de items en formato JSON</li>
-                <li><strong>404 Not Found:</strong> Cuando no hay items disponibles</li>
-            </ul>
-            
-            <div class="test-section">
-                <button id="test-get-items" class="test-button">Probar GET /items</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="GET-api-items-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-
-            <div class="api-links">
-                <a href="/items-page" class="api-link">Ver Catálogo de Items</a>
-                <a href="/items" class="api-link">Ver API en JSON</a>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>GET /items/:id</h3>
-            <p>Obtiene un item específico por su ID.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del item</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Item en formato JSON</li>
-                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <input type="number" id="item-id-input" placeholder="ID del item" min="1">
-                <button id="test-get-item-by-id" class="test-button">Probar GET /items/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="GET-api-items-id-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>POST /items</h3>
-            <p>Registra uno o varios items en el catálogo.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del item (requerido)</li>
-                <li><strong>name:</strong> Nombre del item (requerido)</li>
-                <li><strong>type:</strong> Tipo del item (requerido)</li>
-                <li><strong>effect:</strong> Efecto del item (requerido)</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>201 Created:</strong> Item(s) agregado(s) correctamente</li>
-                <li><strong>400 Bad Request:</strong> Cuando faltan atributos o el ID ya existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="item-form">
-                    <div class="form-group">
-                        <label for="item-id">ID:</label>
-                        <input type="number" id="item-id" placeholder="ID del item" min="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-name">Nombre:</label>
-                        <input type="text" id="item-name" placeholder="Nombre del item" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-type">Tipo:</label>
-                        <input type="text" id="item-type" placeholder="Tipo del item" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-effect">Efecto:</label>
-                        <input type="text" id="item-effect" placeholder="Efecto del item" required>
-                    </div>
-                    <button id="add-item" class="add-button">Agregar Item</button>
-                </div>
+            <article id="get-items" class="endpoint">
+                <h3>GET /items</h3>
+                <p>Gets all items from the catalog.</p>
                 
-                <div class="items-list">
-                    <h4>Items a agregar:</h4>
-                    <div id="items-to-add"></div>
-                </div>
-
-                <button id="test-post-items" class="test-button">Probar POST /items</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="POST-api-items-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>PUT /items/:id</h3>
-            <p>Actualiza un item específico por su ID.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del item a actualizar</li>
-                <li><strong>name:</strong> Nuevo nombre del item (opcional)</li>
-                <li><strong>type:</strong> Nuevo tipo del item (opcional)</li>
-                <li><strong>effect:</strong> Nuevo efecto del item (opcional)</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Item actualizado correctamente</li>
-                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="item-form">
-                    <div class="form-group">
-                        <label for="update-item-id">ID del item a actualizar:</label>
-                        <input type="number" id="update-item-id" placeholder="ID del item" min="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="update-item-name">Nuevo nombre:</label>
-                        <input type="text" id="update-item-name" placeholder="Nuevo nombre (opcional)">
-                    </div>
-                    <div class="form-group">
-                        <label for="update-item-type">Nuevo tipo:</label>
-                        <input type="text" id="update-item-type" placeholder="Nuevo tipo (opcional)">
-                    </div>
-                    <div class="form-group">
-                        <label for="update-item-effect">Nuevo efecto:</label>
-                        <input type="text" id="update-item-effect" placeholder="Nuevo efecto (opcional)">
-                    </div>
-                </div>
-
-                <button id="test-put-item" class="test-button">Probar PUT /items/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="PUT-api-items-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>DELETE /items/:id</h3>
-            <p>Elimina un item específico por su ID.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del item a eliminar</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Item eliminado correctamente</li>
-                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="item-form">
-                    <div class="form-group">
-                        <label for="delete-item-id">ID del item a eliminar:</label>
-                        <input type="number" id="delete-item-id" placeholder="ID del item" min="1" required>
-                    </div>
-                </div>
-
-                <button id="test-delete-item" class="test-button">Probar DELETE /items/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="DELETE-api-items-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>GET /users</h3>
-            <p>Obtiene todos los usuarios con sus items completos.</p>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Lista de usuarios con sus items en formato JSON</li>
-                <li><strong>404 Not Found:</strong> Cuando no hay usuarios disponibles</li>
-            </ul>
-            
-            <div class="test-section">
-                <button id="test-get-users" class="test-button">Probar GET /users</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="GET-api-users-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>GET /users/:id</h3>
-            <p>Obtiene un usuario específico por su ID, incluyendo sus items detallados.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del usuario</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Usuario con sus items en formato JSON</li>
-                <li><strong>404 Not Found:</strong> Cuando el usuario no existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <input type="number" id="user-id-input" placeholder="ID del usuario" min="1">
-                <button id="test-get-user-by-id" class="test-button">Probar GET /users/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="GET-api-users-id-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>POST /users</h3>
-            <p>Registra uno o varios usuarios con sus items.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del usuario (requerido)</li>
-                <li><strong>name:</strong> Nombre del usuario (requerido)</li>
-                <li><strong>email:</strong> Correo electrónico del usuario (requerido)</li>
-                <li><strong>items:</strong> Array de items del usuario (requerido)</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>201 Created:</strong> Usuario(s) agregado(s) correctamente</li>
-                <li><strong>400 Bad Request:</strong> Cuando faltan atributos, el ID ya existe o algún item no existe en el catálogo</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="user-form">
-                    <div class="form-group">
-                        <label for="user-id">ID:</label>
-                        <input type="number" id="user-id" placeholder="ID del usuario" min="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-name">Nombre:</label>
-                        <input type="text" id="user-name" placeholder="Nombre del usuario" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-email">Email:</label>
-                        <input type="email" id="user-email" placeholder="Email del usuario" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-items">Items (IDs separados por comas):</label>
-                        <input type="text" id="user-items" placeholder="1,2,3" required>
-                    </div>
-                    <button id="add-user" class="add-button">Agregar Usuario</button>
-                </div>
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> List of items in JSON format</li>
+                    <li><strong>404 Not Found:</strong> When no items are available</li>
+                </ul>
                 
-                <div class="users-list">
-                    <h4>Usuarios a agregar:</h4>
-                    <div id="users-to-add"></div>
+                <div class="test-section">
+                    <button id="test-get-items" class="test-button">Test GET /items</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="GET-api-items-result">Running test...</pre>
+                    </div>
                 </div>
+            </article>
 
-                <button id="test-post-users" class="test-button">Probar POST /users</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="POST-api-users-result">Ejecutando prueba...</pre>
+            <article id="get-item-by-id" class="endpoint">
+                <h3>GET /items/:id</h3>
+                <p>Gets a specific item by its ID.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the item</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> Item in JSON format</li>
+                    <li><strong>404 Not Found:</strong> When the item doesn't exist</li>
+                </ul>
+                
+                <div class="test-section">
+                    <input type="number" id="item-id-input" placeholder="Item ID" min="1">
+                    <button id="test-get-item-by-id" class="test-button">Test GET /items/:id</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="GET-api-items-id-result">Running test...</pre>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
 
-        <article class="endpoint">
-            <h3>PUT /users/:id</h3>
-            <p>Actualiza un usuario existente por su ID. Solo actualiza los campos proporcionados.</p>
+            <article id="post-items" class="endpoint">
+                <h3>POST /items</h3>
+                <p>Registers one or more items in the catalog.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the item (required)</li>
+                    <li><strong>name:</strong> Name of the item (required)</li>
+                    <li><strong>type:</strong> Type of the item (required)</li>
+                    <li><strong>effect:</strong> Effect of the item (required)</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>201 Created:</strong> Item(s) added successfully</li>
+                    <li><strong>400 Bad Request:</strong> When attributes are missing or ID already exists</li>
+                </ul>
+                
+                <div class="test-section">
+                    <div class="item-form">
+                        <div class="form-group">
+                            <label for="item-id">ID:</label>
+                            <input type="number" id="item-id" placeholder="Item ID" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-name">Name:</label>
+                            <input type="text" id="item-name" placeholder="Item name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-type">Type:</label>
+                            <input type="text" id="item-type" placeholder="Item type" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-effect">Effect:</label>
+                            <input type="text" id="item-effect" placeholder="Item effect" required>
+                        </div>
+                    </div>
+
+                    <button id="test-post-items" class="test-button">Test POST /items</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="POST-api-items-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="put-item" class="endpoint">
+                <h3>PUT /items/:id</h3>
+                <p>Updates a specific item by its ID.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the item to update</li>
+                    <li><strong>name:</strong> New name of the item (optional)</li>
+                    <li><strong>type:</strong> New type of the item (optional)</li>
+                    <li><strong>effect:</strong> New effect of the item (optional)</li>
+                </ul>
             
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID del usuario a actualizar</li>
-                <li><strong>name:</strong> Nuevo nombre del usuario (opcional)</li>
-                <li><strong>email:</strong> Nuevo email del usuario (opcional)</li>
-                <li><strong>items:</strong> Nueva lista de IDs de items del usuario (opcional)</li>
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> Item updated successfully</li>
+                    <li><strong>404 Not Found:</strong> When the item doesn't exist</li>
+                </ul>
+                
+                <div class="test-section">
+                    <div class="item-form">
+                        <div class="form-group">
+                            <label for="update-item-id">ID of item to update:</label>
+                            <input type="number" id="update-item-id" placeholder="Item ID" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="update-item-name">New name:</label>
+                            <input type="text" id="update-item-name" placeholder="New name (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="update-item-type">New type:</label>
+                            <input type="text" id="update-item-type" placeholder="New type (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="update-item-effect">New effect:</label>
+                            <input type="text" id="update-item-effect" placeholder="New effect (optional)">
+                        </div>
+                    </div>
+
+                    <button id="test-put-item" class="test-button">Test PUT /items/:id</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="PUT-api-items-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="delete-item" class="endpoint">
+                <h3>DELETE /items/:id</h3>
+                <p>Deletes a specific item by its ID.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the item to delete</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> Item deleted successfully</li>
+                    <li><strong>404 Not Found:</strong> When the item doesn't exist</li>
+                </ul>
+                
+                <div class="test-section">
+                    <div class="item-form">
+                        <div class="form-group">
+                            <label for="delete-item-id">ID of item to delete:</label>
+                            <input type="number" id="delete-item-id" placeholder="Item ID" min="1" required>
+                        </div>
+                    </div>
+
+                    <button id="test-delete-item" class="test-button">Test DELETE /items/:id</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="DELETE-api-items-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="get-users" class="endpoint">
+                <h3>GET /users</h3>
+                <p>Gets all users with their complete items.</p>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> List of users with their items in JSON format</li>
+                    <li><strong>404 Not Found:</strong> When no users are available</li>
+                </ul>
+                
+                <div class="test-section">
+                    <button id="test-get-users" class="test-button">Test GET /users</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="GET-api-users-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="get-user-by-id" class="endpoint">
+                <h3>GET /users/:id</h3>
+                <p>Gets a specific user by their ID, including their detailed items.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the user</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> User with their items in JSON format</li>
+                    <li><strong>404 Not Found:</strong> When the user doesn't exist</li>
+                </ul>
+                
+                <div class="test-section">
+                    <input type="number" id="user-id-input" placeholder="User ID" min="1">
+                    <button id="test-get-user-by-id" class="test-button">Test GET /users/:id</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="GET-api-users-id-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="post-users" class="endpoint">
+                <h3>POST /users</h3>
+                <p>Registers one or more users with their items.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the user (required)</li>
+                    <li><strong>name:</strong> Name of the user (required)</li>
+                    <li><strong>email:</strong> Email of the user (required)</li>
+                    <li><strong>items:</strong> Array of user's items (required)</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>201 Created:</strong> User(s) added successfully</li>
+                    <li><strong>400 Bad Request:</strong> When attributes are missing, ID already exists, or some items don't exist in the catalog</li>
+                </ul>
+                
+                <div class="test-section">
+                    <div class="user-form">
+                        <div class="form-group">
+                            <label for="user-id">ID:</label>
+                            <input type="number" id="user-id" placeholder="User ID" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-name">Name:</label>
+                            <input type="text" id="user-name" placeholder="User name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-email">Email:</label>
+                            <input type="email" id="user-email" placeholder="User email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-items">Items (IDs separated by commas):</label>
+                            <input type="text" id="user-items" placeholder="1,2,3" required>
+                        </div>
+                    </div>
+
+                    <button id="test-post-users" class="test-button">Test POST /users</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="POST-api-users-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="put-user" class="endpoint">
+                <h3>PUT /users/:id</h3>
+                <p>Updates an existing user by their ID. Only updates provided fields.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> ID of the user to update</li>
+                    <li><strong>name:</strong> New name of the user (optional)</li>
+                    <li><strong>email:</strong> New email of the user (optional)</li>
+                    <li><strong>items:</strong> New list of user's item IDs (optional)</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> User updated successfully</li>
+                    <li><strong>400 Bad Request:</strong> One or more items don't exist</li>
+                    <li><strong>404 Not Found:</strong> User not found</li>
+                </ul>
+                
+                <div class="test-section">
+                    <div class="user-form">
+                        <div class="form-group">
+                            <label for="userId">ID of user to update:</label>
+                            <input type="number" id="userId" placeholder="User ID" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">New name:</label>
+                            <input type="text" id="userName" placeholder="New name (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">New email:</label>
+                            <input type="email" id="userEmail" placeholder="New email (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="userItems">New items (IDs separated by commas):</label>
+                            <input type="text" id="userItems" placeholder="Item IDs (e.g., 1,2,3)">
+                        </div>
+                    </div>
+
+                    <button id="test-put-user" class="test-button">Test PUT /users/:id</button>
+                    <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="PUT-api-users-result">Running test...</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article id="delete-user" class="endpoint">
+                <h3>DELETE /users/:id</h3>
+                <p>Deletes a specific user by their ID.</p>
+                
+                <h4>Parameters:</h4>
+                <ul>
+                    <li><strong>id:</strong> Numeric ID of the user to delete</li>
+                </ul>
+                
+                <h4>Responses:</h4>
+                <ul>
+                    <li><strong>200 OK:</strong> User deleted successfully</li>
+                    <li><strong>404 Not Found:</strong> When the user doesn't exist</li>
             </ul>
             
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Usuario actualizado exitosamente</li>
-                <li><strong>400 Bad Request:</strong> Uno o más items no existen</li>
-                <li><strong>404 Not Found:</strong> Usuario no encontrado</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="user-form">
-                    <div class="form-group">
-                        <label for="userId">ID del usuario a actualizar:</label>
-                        <input type="number" id="userId" placeholder="ID del usuario" min="1" required>
+                <div class="test-section">
+                    <div class="user-form">
+                        <div class="form-group">
+                            <label for="delete-user-id">ID of user to delete:</label>
+                            <input type="number" id="delete-user-id" placeholder="User ID" min="1" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="userName">Nuevo nombre:</label>
-                        <input type="text" id="userName" placeholder="Nuevo nombre (opcional)">
-                    </div>
-                    <div class="form-group">
-                        <label for="userEmail">Nuevo email:</label>
-                        <input type="email" id="userEmail" placeholder="Nuevo email (opcional)">
-                    </div>
-                    <div class="form-group">
-                        <label for="userItems">Nuevos items (IDs separados por comas):</label>
-                        <input type="text" id="userItems" placeholder="IDs de items (ej: 1,2,3)">
-                    </div>
-                </div>
 
-                <button id="test-put-user" class="test-button">Probar PUT /users/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="PUT-api-users-result">Ejecutando prueba...</pre>
-                </div>
-            </div>
-        </article>
-
-        <article class="endpoint">
-            <h3>DELETE /users/:id</h3>
-            <p>Borra un usuario específico por su ID.</p>
-            
-            <h4>Parámetros:</h4>
-            <ul>
-                <li><strong>id:</strong> ID numérico del usuario a borrar</li>
-            </ul>
-            
-            <h4>Respuestas:</h4>
-            <ul>
-                <li><strong>200 OK:</strong> Usuario borrado exitosamente</li>
-                <li><strong>404 Not Found:</strong> Cuando el usuario no existe</li>
-            </ul>
-            
-            <div class="test-section">
-                <div class="user-form">
-                    <div class="form-group">
-                        <label for="delete-user-id">ID del usuario a borrar:</label>
-                        <input type="number" id="delete-user-id" placeholder="ID del usuario" min="1" required>
+                    <button id="test-delete-user" class="test-button">Test DELETE /users/:id</button>
+            <div class="test-results">
+                        <h4>Test Results:</h4>
+                        <pre id="DELETE-api-users-result">Running test...</pre>
                     </div>
-                </div>
-
-                <button id="test-delete-user" class="test-button">Probar DELETE /users/:id</button>
-                <div class="test-results">
-                    <h4>Resultados de la prueba:</h4>
-                    <pre id="DELETE-api-users-result">Ejecutando prueba...</pre>
-                </div>
             </div>
         </article>
     </section>
+    </main>
 
     <script src="../js/script.js"></script>
 </body>

@@ -17,38 +17,31 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API Endpoint para obtener todos los items
-app.get('/items', (req, res) => {
-    try {
-        const items = mockItems;
-        
-        if (!items || items.length === 0) {
-            return res.status(404).json({ message: "No hay items disponibles" });
-        }
-        
-        res.json(items);
-    } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+app.get('/api/items', (req, res) => {
+    if (mockItems.length === 0) {
+        return res.status(404).json({ error: 'No items available' });
     }
+    res.json(mockItems);
 });
 
 // API Endpoint para obtener un item por ID
-app.get('/items/:id', (req, res) => {
+app.get('/api/items/:id', (req, res) => {
     try {
         const itemId = parseInt(req.params.id);
         const item = mockItems.find(item => item.id === itemId);
         
         if (!item) {
-            return res.status(404).json({ message: "Item no encontrado" });
+            return res.status(404).json({ message: "Item not found" });
         }
         
         res.json(item);
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para registrar items
-app.post('/items', (req, res) => {
+app.post('/api/items', (req, res) => {
     try {
         const items = req.body;
         
@@ -60,14 +53,14 @@ app.post('/items', (req, res) => {
             // Verificar atributos requeridos
             if (!item.id || !item.name || !item.type || !item.effect) {
                 return res.status(400).json({ 
-                    message: "Todos los items deben tener id, name, type y effect" 
+                    message: "All items must have id, name, type and effect" 
                 });
             }
             
             // Verificar si el ID ya existe
             if (mockItems.some(existingItem => existingItem.id === item.id)) {
                 return res.status(400).json({ 
-                    message: `Ya existe un item con el ID ${item.id}` 
+                    message: `An item with ID ${item.id} already exists` 
                 });
             }
         }
@@ -76,16 +69,16 @@ app.post('/items', (req, res) => {
         mockItems.push(...itemsToAdd);
         
         res.status(201).json({ 
-            message: "Item(s) agregado(s) correctamente",
+            message: "Item(s) added successfully",
             items: itemsToAdd
         });
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para actualizar un item por ID
-app.put('/items/:id', (req, res) => {
+app.put('/api/items/:id', (req, res) => {
     try {
         const itemId = parseInt(req.params.id);
         const updates = req.body;
@@ -93,7 +86,7 @@ app.put('/items/:id', (req, res) => {
         // Verificar si el item existe
         const itemIndex = mockItems.findIndex(item => item.id === itemId);
         if (itemIndex === -1) {
-            return res.status(404).json({ message: "Item no encontrado" });
+            return res.status(404).json({ message: "Item not found" });
         }
         
         // Actualizar solo los campos enviados
@@ -104,67 +97,80 @@ app.put('/items/:id', (req, res) => {
         
         // Reemplazar el item en el array
         mockItems[itemIndex] = updatedItem;
+
+        // Actualizar el item en todos los usuarios que lo tengan
+        mockUsers.forEach(user => {
+            const itemIndex = user.items.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+                user.items[itemIndex] = updatedItem;
+            }
+        });
         
         res.status(200).json({ 
-            message: "Item actualizado correctamente",
+            message: "Item updated successfully",
             item: updatedItem
         });
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para eliminar un item por ID
-app.delete('/items/:id', (req, res) => {
+app.delete('/api/items/:id', (req, res) => {
     try {
         const itemId = parseInt(req.params.id);
         
         // Verificar si el item existe
         const itemIndex = mockItems.findIndex(item => item.id === itemId);
         if (itemIndex === -1) {
-            return res.status(404).json({ message: "Item no encontrado" });
+            return res.status(404).json({ message: "Item not found" });
         }
         
         // Eliminar el item del array
         mockItems.splice(itemIndex, 1);
+
+        // Eliminar el item de todos los usuarios que lo tengan
+        mockUsers.forEach(user => {
+            user.items = user.items.filter(item => item.id !== itemId);
+        });
         
-        res.status(200).json({ message: "Item eliminado" });
+        res.status(200).json({ message: "Item deleted" });
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para obtener todos los usuarios
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
     try {
         if (!mockUsers || mockUsers.length === 0) {
-            return res.status(404).json({ message: "No hay usuarios" });
+            return res.status(404).json({ message: "No users" });
         }
         
         res.json(mockUsers);
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para obtener un usuario por ID
-app.get('/users/:id', (req, res) => {
+app.get('/api/users/:id', (req, res) => {
     try {
         const userId = parseInt(req.params.id);
         const user = mockUsers.find(user => user.id === userId);
         
         if (!user) {
-            return res.status(404).json({ message: "Usuario no encontrado" });
+            return res.status(404).json({ message: "User not found" });
         }
         
         res.json(user);
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 
 // API Endpoint para registrar usuarios
-app.post('/users', (req, res) => {
+app.post('/api/users', (req, res) => {
     try {
         const users = req.body;
         
@@ -174,44 +180,67 @@ app.post('/users', (req, res) => {
         // Validar cada usuario
         for (const user of usersToAdd) {
             // Verificar atributos requeridos
-            if (!user.id || !user.name || !user.email || !Array.isArray(user.items)) {
+            if (!user.id || !user.name || !user.email) {
                 return res.status(400).json({ 
-                    message: "Todos los usuarios deben tener id, name, email y items (array)" 
+                    message: "All users must have id, name and email" 
                 });
             }
             
             // Verificar si el ID ya existe
             if (mockUsers.some(existingUser => existingUser.id === user.id)) {
                 return res.status(400).json({ 
-                    message: `Ya existe un usuario con el ID ${user.id}` 
+                    message: `A user with ID ${user.id} already exists` 
                 });
             }
             
-            // Verificar que todos los items existan en el catálogo y obtener sus detalles completos
-            const completeItems = [];
-            for (const item of user.items) {
-                const catalogItem = mockItems.find(existingItem => existingItem.id === item.id);
-                if (!catalogItem) {
-                    return res.status(400).json({ 
-                        message: `El item con ID ${item.id} no existe en el catálogo` 
-                    });
+            // Procesar los items
+            let items = [];
+            if (user.items) {
+                // Si items es un string (IDs separados por comas), convertirlo a array
+                if (typeof user.items === 'string') {
+                    items = user.items.split(',').map(id => parseInt(id.trim()));
+                } else if (Array.isArray(user.items)) {
+                    // Si items es un array, extraer los IDs
+                    items = user.items.map(item => {
+                        if (typeof item === 'object' && item !== null) {
+                            return item.id;
+                        } else if (typeof item === 'number') {
+                            return item;
+                        }
+                        return null;
+                    }).filter(id => id !== null);
                 }
-                completeItems.push(catalogItem);
+                
+                // Verificar que todos los items existan en el catálogo y obtener sus detalles completos
+                const completeItems = [];
+                for (const itemId of items) {
+                    const catalogItem = mockItems.find(existingItem => existingItem.id === itemId);
+                    if (!catalogItem) {
+                        return res.status(400).json({ 
+                            message: `The item with ID ${itemId} does not exist in the catalog` 
+                        });
+                    }
+                    completeItems.push(catalogItem);
+                }
+                
+                // Reemplazar los items con sus detalles completos
+                user.items = completeItems;
+            } else {
+                // Si no se proporcionan items, inicializar como array vacío
+                user.items = [];
             }
-            
-            // Reemplazar los items con sus detalles completos
-            user.items = completeItems;
         }
         
         // Agregar los usuarios
         mockUsers.push(...usersToAdd);
         
         res.status(201).json({ 
-            message: "Usuario(s) agregado(s) correctamente",
+            message: "User(s) added successfully",
             users: usersToAdd
         });
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
+        console.error('Error adding user:', error);
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 

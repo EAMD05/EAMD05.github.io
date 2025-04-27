@@ -1,40 +1,40 @@
 const mockUsers = [
     {
         id: 1,
-        name: "Juan Pérez",
-        email: "juan@example.com",
+        name: "John Doe",
+        email: "john@example.com",
         items: [
             {
                 id: 1,
-                name: "Espada de Fuego",
-                type: "Arma",
-                effect: "Daño de fuego +10"
+                name: "Fire Sword",
+                type: "Weapon",
+                effect: "Fire damage +10"
             },
             {
                 id: 2,
-                name: "Escudo de Hielo",
-                type: "Defensa",
-                effect: "Defensa +15, Resistencia al hielo"
+                name: "Ice Shield",
+                type: "Defense",
+                effect: "Defense +15, Ice resistance"
             }
         ]
     },
     {
         id: 2,
-        name: "María García",
-        email: "maria@example.com",
+        name: "Jane Smith",
+        email: "jane@example.com",
         items: [
             {
                 id: 3,
-                name: "Varita Mágica",
-                type: "Arma",
-                effect: "Poder mágico +20"
+                name: "Magic Wand",
+                type: "Weapon",
+                effect: "Magic power +20"
             }
         ]
     },
     {
         id: 3,
-        name: "Carlos López",
-        email: "carlos@example.com",
+        name: "Bob Johnson",
+        email: "bob@example.com",
         items: []
     }
 ];

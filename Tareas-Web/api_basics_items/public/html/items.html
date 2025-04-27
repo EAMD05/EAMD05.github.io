@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Items</title>
+    <title>Items Catalog</title>
     <link rel="stylesheet" href="../css/items.css">
 </head>
 <body>
     <div class="container">
-        <h1>Catálogo de Items</h1>
+        <h1>Items Catalog</h1>
         <div id="items-container">
-            <div class="loading">Cargando items...</div>
+            <div class="loading">Loading items...</div>
         </div>
     </div>
 
@@ -19,11 +19,11 @@
             const container = document.getElementById('items-container');
             
             try {
-                const response = await fetch('/items');
+                const response = await fetch('/api/items');
                 const items = await response.json();
                 
                 if (items.length === 0) {
-                    container.innerHTML = '<div class="error">No hay items disponibles</div>';
+                    container.innerHTML = '<div class="error">No items available</div>';
                     return;
                 }
 
@@ -31,19 +31,19 @@
                     <div class="item-card">
                         <h2 class="item-name">${item.name}</h2>
                         <div class="item-type">Type: ${item.type}</div>
-                        <div class="item-effect">Efect: ${item.effect}</div>
+                        <div class="item-effect">Effect: ${item.effect}</div>
                         <div class="item-id">ID: ${item.id}</div>
                     </div>
                 `).join('');
 
                 container.innerHTML = `<div class="items-grid">${itemsHTML}</div>`;
             } catch (error) {
-                container.innerHTML = '<div class="error">Error al cargar los items</div>';
+                container.innerHTML = '<div class="error">Error loading items</div>';
                 console.error('Error:', error);
             }
         }
 
-        // Cargar los items cuando la página se cargue
+        // Load items when the page loads
         document.addEventListener('DOMContentLoaded', loadItems);
     </script>
 </body>

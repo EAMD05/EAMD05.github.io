@@ -1,0 +1,242 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* API documentation styles */
+article {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Test section styles */
+.test-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.test-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.test-button:hover {
+    background-color: #0056b3;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Result display styles */
+.result {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+/* Card styles for items and users */
+.item-card,
+.user-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-info,
+.user-info {
+    flex-grow: 1;
+}
+
+.remove-item,
+.remove-user {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-item:hover,
+.remove-user:hover {
+    background-color: #c82333;
+}
+
+/* Error message styles */
+.error {
+    color: #dc3545;
+    margin-top: 10px;
+}
+
+/* Success message styles */
+.success {
+    color: #28a745;
+    margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .item-card,
+    .user-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .remove-item,
+    .remove-user {
+        margin-top: 10px;
+    }
+}
+
+/* View Options styles */
+.view-options {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #444;
+}
+
+.view-options h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.view-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.view-options .view-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.view-options .view-link:hover {
+    background-color: #444;
+}
+
+/* API Links styles */
+.api-links {
+    margin-top: 1rem;
+}
+
+.api-links .api-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.api-links .api-link:hover {
+    background-color: #e0e0e0;
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    width: 250px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+
+.sidebar .section-title {
+    color: #fff;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #444;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+} 
