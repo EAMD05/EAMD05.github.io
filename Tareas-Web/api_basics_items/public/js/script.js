@@ -254,4 +254,27 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('GET /users error:', error);
         }
     });
+
+    // Prueba para GET /users/:id
+    const testGetUserByIdButton = document.getElementById('test-get-user-by-id');
+    const userIdInput = document.getElementById('user-id-input');
+    const getUserByIdResult = document.getElementById('GET-api-users-id-result');
+
+    testGetUserByIdButton.addEventListener('click', async () => {
+        const userId = userIdInput.value;
+        if (!userId) {
+            getUserByIdResult.textContent = 'Por favor, ingresa un ID válido';
+            return;
+        }
+
+        try {
+            const response = await fetch(`/users/${userId}`);
+            const data = await response.json();
+            getUserByIdResult.textContent = JSON.stringify(data, null, 2);
+            console.log(`GET /users/${userId} response:`, data);
+        } catch (error) {
+            getUserByIdResult.textContent = `Error: ${error.message}`;
+            console.error(`GET /users/${userId} error:`, error);
+        }
+    });
 }); 

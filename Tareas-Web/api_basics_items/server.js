@@ -147,6 +147,22 @@ app.get('/users', (req, res) => {
     }
 });
 
+// API Endpoint para obtener un usuario por ID
+app.get('/users/:id', (req, res) => {
+    try {
+        const userId = parseInt(req.params.id);
+        const user = mockUsers.find(user => user.id === userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+        
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));

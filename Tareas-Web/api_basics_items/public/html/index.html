@@ -208,6 +208,31 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>GET /users/:id</h3>
+            <p>Obtiene un usuario específico por su ID, incluyendo sus items detallados.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del usuario</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Usuario con sus items en formato JSON</li>
+                <li><strong>404 Not Found:</strong> Cuando el usuario no existe</li>
+            </ul>
+            
+            <div class="test-section">
+                <input type="number" id="user-id-input" placeholder="ID del usuario" min="1">
+                <button id="test-get-user-by-id" class="test-button">Probar GET /users/:id</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="GET-api-users-id-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>
