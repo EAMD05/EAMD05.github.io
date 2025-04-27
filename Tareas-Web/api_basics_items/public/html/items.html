@@ -19,7 +19,7 @@
             const container = document.getElementById('items-container');
             
             try {
-                const response = await fetch('/api/items');
+                const response = await fetch('/items');
                 const items = await response.json();
                 
                 if (items.length === 0) {

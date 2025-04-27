@@ -29,10 +29,35 @@
                     <pre id="GET-api-items-result">Ejecutando prueba...</pre>
                 </div>
             </div>
-            
+
             <div class="api-links">
                 <a href="/items-page" class="api-link">Ver Catálogo de Items</a>
                 <a href="/items" class="api-link">Ver API en JSON</a>
+            </div>
+        </article>
+
+        <article class="endpoint">
+            <h3>GET /items/:id</h3>
+            <p>Obtiene un item específico por su ID.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del item</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Item en formato JSON</li>
+                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
+            </ul>
+            
+            <div class="test-section">
+                <input type="number" id="item-id-input" placeholder="ID del item" min="1">
+                <button id="test-get-item-by-id" class="test-button">Probar GET /items/:id</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="GET-api-items-id-result">Ejecutando prueba...</pre>
+                </div>
             </div>
         </article>
     </section>

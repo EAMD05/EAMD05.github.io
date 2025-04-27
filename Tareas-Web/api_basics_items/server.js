@@ -15,27 +15,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API Endpoint para obtener los items
-app.get('/api/items', (req, res) => {
-    try {
-        const items = mockItems;
-        
-        if (!items || items.length === 0) {
-            return res.status(404).json({ message: "No hay items disponibles" });
-        }
-        
-        res.json(items);
-    } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor" });
-    }
-});
-
-// Ruta para la página principal
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
-});
-
-// Ruta para la página de items
+// API Endpoint para obtener todos los items
 app.get('/items', (req, res) => {
     try {
         const items = mockItems;
@@ -48,6 +28,32 @@ app.get('/items', (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Error interno del servidor" });
     }
+});
+
+// API Endpoint para obtener un item por ID
+app.get('/items/:id', (req, res) => {
+    try {
+        const itemId = parseInt(req.params.id);
+        const item = mockItems.find(item => item.id === itemId);
+        
+        if (!item) {
+            return res.status(404).json({ message: "Item no encontrado" });
+        }
+        
+        res.json(item);
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+// Ruta para la página principal
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
+});
+
+// Ruta para la página de items
+app.get('/items-page', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html', 'items.html'));
 });
 
 app.listen(port, () => {

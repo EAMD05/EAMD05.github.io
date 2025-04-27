@@ -36,6 +36,7 @@ async function testGetItems() {
 
 // Ejecutar pruebas cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
+    // Prueba para GET /items
     const testGetItemsButton = document.getElementById('test-get-items');
     const getItemsResult = document.getElementById('GET-api-items-result');
 
@@ -44,8 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/items');
             const data = await response.json();
             getItemsResult.textContent = JSON.stringify(data, null, 2);
+            console.log('GET /items response:', data);
         } catch (error) {
             getItemsResult.textContent = `Error: ${error.message}`;
+            console.error('GET /items error:', error);
+        }
+    });
+
+    // Prueba para GET /items/:id
+    const testGetItemByIdButton = document.getElementById('test-get-item-by-id');
+    const itemIdInput = document.getElementById('item-id-input');
+    const getItemByIdResult = document.getElementById('GET-api-items-id-result');
+
+    testGetItemByIdButton.addEventListener('click', async () => {
+        const itemId = itemIdInput.value;
+        if (!itemId) {
+            getItemByIdResult.textContent = 'Por favor, ingresa un ID válido';
+            return;
+        }
+
+        try {
+            const response = await fetch(`/items/${itemId}`);
+            const data = await response.json();
+            getItemByIdResult.textContent = JSON.stringify(data, null, 2);
+            console.log(`GET /items/${itemId} response:`, data);
+        } catch (error) {
+            getItemByIdResult.textContent = `Error: ${error.message}`;
+            console.error(`GET /items/${itemId} error:`, error);
         }
     });
 }); 
