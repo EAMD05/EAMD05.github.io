@@ -285,8 +285,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const testPostUsersButton = document.getElementById('test-post-users');
     const postUsersResult = document.getElementById('POST-api-users-result');
 
+    // Función para obtener la información completa de un item
+    async function getItemDetails(itemId) {
+        try {
+            const response = await fetch(`/items/${itemId}`);
+            if (!response.ok) {
+                throw new Error(`Item con ID ${itemId} no encontrado`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error al obtener detalles del item ${itemId}:`, error);
+            return null;
+        }
+    }
+
     // Función para agregar un usuario a la lista
-    function addUserToList(user) {
+    async function addUserToList(user) {
+        // Obtener información completa de los items
+        const completeItems = [];
+        for (const item of user.items) {
+            const itemDetails = await getItemDetails(item.id);
+            if (itemDetails) {
+                completeItems.push(itemDetails);
+            }
+        }
+
         const userElement = document.createElement('div');
         userElement.className = 'user-card';
         userElement.innerHTML = `
@@ -294,7 +317,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <strong>ID:</strong> ${user.id}<br>
                 <strong>Nombre:</strong> ${user.name}<br>
                 <strong>Email:</strong> ${user.email}<br>
-                <strong>Items:</strong> ${user.items.map(item => item.id).join(', ')}
+                <strong>Items:</strong>
+                <ul>
+                    ${completeItems.map(item => `
+                        <li>
+                            ID: ${item.id}, 
+                            Nombre: ${item.name}, 
+                            Tipo: ${item.type}, 
+                            Efecto: ${item.effect}
+                        </li>
+                    `).join('')}
+                </ul>
             </div>
             <button class="remove-user" data-id="${user.id}">Eliminar</button>
         `;
@@ -311,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Evento para agregar un nuevo usuario
-    document.getElementById('add-user').addEventListener('click', () => {
+    document.getElementById('add-user').addEventListener('click', async () => {
         const id = document.getElementById('user-id').value;
         const name = document.getElementById('user-name').value;
         const email = document.getElementById('user-email').value;
@@ -339,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         usersToAdd.push(newUser);
-        addUserToList(newUser);
+        await addUserToList(newUser);
 
         // Limpiar el formulario
         userForm.reset();

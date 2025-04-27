@@ -187,14 +187,20 @@ app.post('/users', (req, res) => {
                 });
             }
             
-            // Verificar que todos los items existan en el catálogo
+            // Verificar que todos los items existan en el catálogo y obtener sus detalles completos
+            const completeItems = [];
             for (const item of user.items) {
-                if (!mockItems.some(existingItem => existingItem.id === item.id)) {
+                const catalogItem = mockItems.find(existingItem => existingItem.id === item.id);
+                if (!catalogItem) {
                     return res.status(400).json({ 
                         message: `El item con ID ${item.id} no existe en el catálogo` 
                     });
                 }
+                completeItems.push(catalogItem);
             }
+            
+            // Reemplazar los items con sus detalles completos
+            user.items = completeItems;
         }
         
         // Agregar los usuarios
