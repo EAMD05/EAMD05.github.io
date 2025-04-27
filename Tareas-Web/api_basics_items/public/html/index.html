@@ -60,6 +60,58 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>POST /items</h3>
+            <p>Registra uno o varios items en el catálogo.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del item (requerido)</li>
+                <li><strong>name:</strong> Nombre del item (requerido)</li>
+                <li><strong>type:</strong> Tipo del item (requerido)</li>
+                <li><strong>effect:</strong> Efecto del item (requerido)</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>201 Created:</strong> Item(s) agregado(s) correctamente</li>
+                <li><strong>400 Bad Request:</strong> Cuando faltan atributos o el ID ya existe</li>
+            </ul>
+            
+            <div class="test-section">
+                <div class="item-form">
+                    <div class="form-group">
+                        <label for="item-id">ID:</label>
+                        <input type="number" id="item-id" placeholder="ID del item" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-name">Nombre:</label>
+                        <input type="text" id="item-name" placeholder="Nombre del item" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-type">Tipo:</label>
+                        <input type="text" id="item-type" placeholder="Tipo del item" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-effect">Efecto:</label>
+                        <input type="text" id="item-effect" placeholder="Efecto del item" required>
+                    </div>
+                    <button id="add-item" class="add-button">Agregar Item</button>
+                </div>
+                
+                <div class="items-list">
+                    <h4>Items a agregar:</h4>
+                    <div id="items-to-add"></div>
+                </div>
+
+                <button id="test-post-items" class="test-button">Probar POST /items</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="POST-api-items-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

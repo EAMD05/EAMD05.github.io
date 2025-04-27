@@ -74,4 +74,99 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`GET /items/${itemId} error:`, error);
         }
     });
+
+    // Prueba para POST /items
+    const itemsToAdd = [];
+    const itemForm = document.querySelector('.item-form');
+    const itemsList = document.getElementById('items-to-add');
+    const testPostItemsButton = document.getElementById('test-post-items');
+    const postItemsResult = document.getElementById('POST-api-items-result');
+
+    // Función para agregar un item a la lista
+    function addItemToList(item) {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'item-card';
+        itemElement.innerHTML = `
+            <div class="item-info">
+                <strong>ID:</strong> ${item.id}<br>
+                <strong>Nombre:</strong> ${item.name}<br>
+                <strong>Tipo:</strong> ${item.type}<br>
+                <strong>Efecto:</strong> ${item.effect}
+            </div>
+            <button class="remove-item" data-id="${item.id}">Eliminar</button>
+        `;
+        itemsList.appendChild(itemElement);
+
+        // Agregar evento para eliminar el item
+        itemElement.querySelector('.remove-item').addEventListener('click', () => {
+            const index = itemsToAdd.findIndex(i => i.id === item.id);
+            if (index !== -1) {
+                itemsToAdd.splice(index, 1);
+                itemElement.remove();
+            }
+        });
+    }
+
+    // Evento para agregar un nuevo item
+    document.getElementById('add-item').addEventListener('click', () => {
+        const id = document.getElementById('item-id').value;
+        const name = document.getElementById('item-name').value;
+        const type = document.getElementById('item-type').value;
+        const effect = document.getElementById('item-effect').value;
+
+        if (!id || !name || !type || !effect) {
+            alert('Por favor, completa todos los campos');
+            return;
+        }
+
+        const newItem = {
+            id: parseInt(id),
+            name,
+            type,
+            effect
+        };
+
+        // Verificar si el ID ya existe en la lista
+        if (itemsToAdd.some(item => item.id === newItem.id)) {
+            alert('Ya existe un item con este ID en la lista');
+            return;
+        }
+
+        itemsToAdd.push(newItem);
+        addItemToList(newItem);
+
+        // Limpiar el formulario
+        itemForm.reset();
+    });
+
+    // Evento para probar POST /items
+    testPostItemsButton.addEventListener('click', async () => {
+        if (itemsToAdd.length === 0) {
+            postItemsResult.textContent = 'Por favor, agrega al menos un item';
+            return;
+        }
+
+        try {
+            const response = await fetch('/items', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(itemsToAdd)
+            });
+            
+            const data = await response.json();
+            postItemsResult.textContent = JSON.stringify(data, null, 2);
+            console.log('POST /items response:', data);
+
+            // Limpiar la lista después de una respuesta exitosa
+            if (response.status === 201) {
+                itemsToAdd.length = 0;
+                itemsList.innerHTML = '';
+            }
+        } catch (error) {
+            postItemsResult.textContent = `Error: ${error.message}`;
+            console.error('POST /items error:', error);
+        }
+    });
 }); 

@@ -46,6 +46,43 @@ app.get('/items/:id', (req, res) => {
     }
 });
 
+// API Endpoint para registrar items
+app.post('/items', (req, res) => {
+    try {
+        const items = req.body;
+        
+        // Verificar si es un array o un solo item
+        const itemsToAdd = Array.isArray(items) ? items : [items];
+        
+        // Validar cada item
+        for (const item of itemsToAdd) {
+            // Verificar atributos requeridos
+            if (!item.id || !item.name || !item.type || !item.effect) {
+                return res.status(400).json({ 
+                    message: "Todos los items deben tener id, name, type y effect" 
+                });
+            }
+            
+            // Verificar si el ID ya existe
+            if (mockItems.some(existingItem => existingItem.id === item.id)) {
+                return res.status(400).json({ 
+                    message: `Ya existe un item con el ID ${item.id}` 
+                });
+            }
+        }
+        
+        // Agregar los items
+        mockItems.push(...itemsToAdd);
+        
+        res.status(201).json({ 
+            message: "Item(s) agregado(s) correctamente",
+            items: itemsToAdd
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));

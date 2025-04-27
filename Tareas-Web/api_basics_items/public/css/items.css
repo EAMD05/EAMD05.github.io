@@ -41,14 +41,14 @@ h1 {
     margin-bottom: 10px;
 }
 
-.item-price {
+.item-type {
     color: #27ae60;
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.item-description {
+.item-effect {
     color: #7f8c8d;
     line-height: 1.5;
 }
