@@ -213,4 +213,29 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`PUT /items/${itemId} error:`, error);
         }
     });
+
+    // Prueba para DELETE /items/:id
+    const testDeleteItemButton = document.getElementById('test-delete-item');
+    const deleteItemsResult = document.getElementById('DELETE-api-items-result');
+
+    testDeleteItemButton.addEventListener('click', async () => {
+        const itemId = document.getElementById('delete-item-id').value;
+        if (!itemId) {
+            deleteItemsResult.textContent = 'Por favor, ingresa un ID válido';
+            return;
+        }
+
+        try {
+            const response = await fetch(`/items/${itemId}`, {
+                method: 'DELETE'
+            });
+            
+            const data = await response.json();
+            deleteItemsResult.textContent = JSON.stringify(data, null, 2);
+            console.log(`DELETE /items/${itemId} response:`, data);
+        } catch (error) {
+            deleteItemsResult.textContent = `Error: ${error.message}`;
+            console.error(`DELETE /items/${itemId} error:`, error);
+        }
+    });
 }); 

@@ -158,6 +158,37 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>DELETE /items/:id</h3>
+            <p>Elimina un item específico por su ID.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del item a eliminar</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Item eliminado correctamente</li>
+                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
+            </ul>
+            
+            <div class="test-section">
+                <div class="item-form">
+                    <div class="form-group">
+                        <label for="delete-item-id">ID del item a eliminar:</label>
+                        <input type="number" id="delete-item-id" placeholder="ID del item" min="1" required>
+                    </div>
+                </div>
+
+                <button id="test-delete-item" class="test-button">Probar DELETE /items/:id</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="DELETE-api-items-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

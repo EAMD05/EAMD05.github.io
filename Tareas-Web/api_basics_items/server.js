@@ -113,6 +113,26 @@ app.put('/items/:id', (req, res) => {
     }
 });
 
+// API Endpoint para eliminar un item por ID
+app.delete('/items/:id', (req, res) => {
+    try {
+        const itemId = parseInt(req.params.id);
+        
+        // Verificar si el item existe
+        const itemIndex = mockItems.findIndex(item => item.id === itemId);
+        if (itemIndex === -1) {
+            return res.status(404).json({ message: "Item no encontrado" });
+        }
+        
+        // Eliminar el item del array
+        mockItems.splice(itemIndex, 1);
+        
+        res.status(200).json({ message: "Item eliminado" });
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
