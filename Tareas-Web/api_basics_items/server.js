@@ -1,37 +1,56 @@
 "use strict";
 
 import express from "express";
-import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import mockItems from './data/mockItems.js';
-import mockUsers from './data/mockUsers.js';
-//import { validateItem, validateUser, isDuplicate } from './data/validators.js';
 
-const port = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
+const port = 3000;
 
-// Arrays that will store the data (initialized with test data)
-let items = [...mockItems];
-let users = [...mockUsers];
-
+// Middleware
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static('./public'));
-
-app.get('/', (req, res)=>{
-    fs.readFile('./public/html/index.html', 'utf8',
-        (err,html)=>{
-            if(err){
-            res.status(500).send('There was an error: '
-                +err)
-                return
-            }
-            
-            console.log("Sending page...")
-            res.send(html)
-            console.log("Page sent!")
-
+// API Endpoint para obtener los items
+app.get('/api/items', (req, res) => {
+    try {
+        const items = mockItems;
+        
+        if (!items || items.length === 0) {
+            return res.status(404).json({ message: "No hay items disponibles" });
         }
         
-    )
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
 
-})
+// Ruta para la página principal
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
+});
+
+// Ruta para la página de items
+app.get('/items', (req, res) => {
+    try {
+        const items = mockItems;
+        
+        if (!items || items.length === 0) {
+            return res.status(404).json({ message: "No hay items disponibles" });
+        }
+        
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
+    console.log('Items cargados:', mockItems.length);
+});
