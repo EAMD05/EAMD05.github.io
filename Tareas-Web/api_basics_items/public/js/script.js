@@ -451,4 +451,27 @@ document.addEventListener('DOMContentLoaded', () => {
             putUserResult.textContent = `Error al realizar la petición: ${error.message}`;
         }
     });
+
+    // Prueba para DELETE /users/:id
+    const testDeleteUserButton = document.getElementById('test-delete-user');
+    const deleteUserResult = document.getElementById('DELETE-api-users-result');
+
+    testDeleteUserButton.addEventListener('click', async () => {
+        const userId = document.getElementById('delete-user-id').value;
+        if (!userId) {
+            deleteUserResult.textContent = 'Por favor ingresa un ID de usuario';
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/users/${userId}`, {
+                method: 'DELETE'
+            });
+
+            const data = await response.json();
+            deleteUserResult.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            deleteUserResult.textContent = `Error al realizar la petición: ${error.message}`;
+        }
+    });
 }); 

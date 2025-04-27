@@ -252,6 +252,20 @@ app.put('/api/users/:id', (req, res) => {
     res.status(200).json(updatedUser);
 });
 
+// DELETE /users/:id - Borrar usuario por ID
+app.delete('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const userIndex = mockUsers.findIndex(u => u.id === userId);
+
+    if (userIndex === -1) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Eliminar el usuario del array
+    mockUsers.splice(userIndex, 1);
+    res.status(200).json({ message: 'User deleted successfully' });
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
