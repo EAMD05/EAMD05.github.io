@@ -238,4 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`DELETE /items/${itemId} error:`, error);
         }
     });
+
+    // Prueba para GET /users
+    const testGetUsersButton = document.getElementById('test-get-users');
+    const getUsersResult = document.getElementById('GET-api-users-result');
+
+    testGetUsersButton.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/users');
+            const data = await response.json();
+            getUsersResult.textContent = JSON.stringify(data, null, 2);
+            console.log('GET /users response:', data);
+        } catch (error) {
+            getUsersResult.textContent = `Error: ${error.message}`;
+            console.error('GET /users error:', error);
+        }
+    });
 }); 

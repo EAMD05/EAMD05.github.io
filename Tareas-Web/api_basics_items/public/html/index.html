@@ -189,6 +189,25 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>GET /users</h3>
+            <p>Obtiene todos los usuarios con sus items completos.</p>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Lista de usuarios con sus items en formato JSON</li>
+                <li><strong>404 Not Found:</strong> Cuando no hay usuarios disponibles</li>
+            </ul>
+            
+            <div class="test-section">
+                <button id="test-get-users" class="test-button">Probar GET /users</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="GET-api-users-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

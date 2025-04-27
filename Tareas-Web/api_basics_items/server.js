@@ -4,6 +4,7 @@ import express from "express";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mockItems from './data/mockItems.js';
+import mockUsers from './data/mockUsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -128,6 +129,19 @@ app.delete('/items/:id', (req, res) => {
         mockItems.splice(itemIndex, 1);
         
         res.status(200).json({ message: "Item eliminado" });
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+// API Endpoint para obtener todos los usuarios
+app.get('/users', (req, res) => {
+    try {
+        if (!mockUsers || mockUsers.length === 0) {
+            return res.status(404).json({ message: "No hay usuarios" });
+        }
+        
+        res.json(mockUsers);
     } catch (error) {
         res.status(500).json({ message: "Error interno del servidor" });
     }
