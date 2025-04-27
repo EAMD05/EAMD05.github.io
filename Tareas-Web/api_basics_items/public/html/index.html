@@ -233,6 +233,58 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>POST /users</h3>
+            <p>Registra uno o varios usuarios con sus items.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del usuario (requerido)</li>
+                <li><strong>name:</strong> Nombre del usuario (requerido)</li>
+                <li><strong>email:</strong> Correo electrónico del usuario (requerido)</li>
+                <li><strong>items:</strong> Array de items del usuario (requerido)</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>201 Created:</strong> Usuario(s) agregado(s) correctamente</li>
+                <li><strong>400 Bad Request:</strong> Cuando faltan atributos, el ID ya existe o algún item no existe en el catálogo</li>
+            </ul>
+            
+            <div class="test-section">
+                <div class="user-form">
+                    <div class="form-group">
+                        <label for="user-id">ID:</label>
+                        <input type="number" id="user-id" placeholder="ID del usuario" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-name">Nombre:</label>
+                        <input type="text" id="user-name" placeholder="Nombre del usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email:</label>
+                        <input type="email" id="user-email" placeholder="Email del usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-items">Items (IDs separados por comas):</label>
+                        <input type="text" id="user-items" placeholder="1,2,3" required>
+                    </div>
+                    <button id="add-user" class="add-button">Agregar Usuario</button>
+                </div>
+                
+                <div class="users-list">
+                    <h4>Usuarios a agregar:</h4>
+                    <div id="users-to-add"></div>
+                </div>
+
+                <button id="test-post-users" class="test-button">Probar POST /users</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="POST-api-users-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

@@ -163,6 +163,52 @@ app.get('/users/:id', (req, res) => {
     }
 });
 
+// API Endpoint para registrar usuarios
+app.post('/users', (req, res) => {
+    try {
+        const users = req.body;
+        
+        // Verificar si es un array o un solo usuario
+        const usersToAdd = Array.isArray(users) ? users : [users];
+        
+        // Validar cada usuario
+        for (const user of usersToAdd) {
+            // Verificar atributos requeridos
+            if (!user.id || !user.name || !user.email || !Array.isArray(user.items)) {
+                return res.status(400).json({ 
+                    message: "Todos los usuarios deben tener id, name, email y items (array)" 
+                });
+            }
+            
+            // Verificar si el ID ya existe
+            if (mockUsers.some(existingUser => existingUser.id === user.id)) {
+                return res.status(400).json({ 
+                    message: `Ya existe un usuario con el ID ${user.id}` 
+                });
+            }
+            
+            // Verificar que todos los items existan en el catálogo
+            for (const item of user.items) {
+                if (!mockItems.some(existingItem => existingItem.id === item.id)) {
+                    return res.status(400).json({ 
+                        message: `El item con ID ${item.id} no existe en el catálogo` 
+                    });
+                }
+            }
+        }
+        
+        // Agregar los usuarios
+        mockUsers.push(...usersToAdd);
+        
+        res.status(201).json({ 
+            message: "Usuario(s) agregado(s) correctamente",
+            users: usersToAdd
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));

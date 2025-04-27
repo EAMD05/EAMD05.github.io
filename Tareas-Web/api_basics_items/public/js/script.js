@@ -277,4 +277,102 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`GET /users/${userId} error:`, error);
         }
     });
+
+    // Prueba para POST /users
+    const usersToAdd = [];
+    const userForm = document.querySelector('.user-form');
+    const usersList = document.getElementById('users-to-add');
+    const testPostUsersButton = document.getElementById('test-post-users');
+    const postUsersResult = document.getElementById('POST-api-users-result');
+
+    // Función para agregar un usuario a la lista
+    function addUserToList(user) {
+        const userElement = document.createElement('div');
+        userElement.className = 'user-card';
+        userElement.innerHTML = `
+            <div class="user-info">
+                <strong>ID:</strong> ${user.id}<br>
+                <strong>Nombre:</strong> ${user.name}<br>
+                <strong>Email:</strong> ${user.email}<br>
+                <strong>Items:</strong> ${user.items.map(item => item.id).join(', ')}
+            </div>
+            <button class="remove-user" data-id="${user.id}">Eliminar</button>
+        `;
+        usersList.appendChild(userElement);
+
+        // Agregar evento para eliminar el usuario
+        userElement.querySelector('.remove-user').addEventListener('click', () => {
+            const index = usersToAdd.findIndex(u => u.id === user.id);
+            if (index !== -1) {
+                usersToAdd.splice(index, 1);
+                userElement.remove();
+            }
+        });
+    }
+
+    // Evento para agregar un nuevo usuario
+    document.getElementById('add-user').addEventListener('click', () => {
+        const id = document.getElementById('user-id').value;
+        const name = document.getElementById('user-name').value;
+        const email = document.getElementById('user-email').value;
+        const itemsInput = document.getElementById('user-items').value;
+
+        if (!id || !name || !email || !itemsInput) {
+            alert('Por favor, completa todos los campos');
+            return;
+        }
+
+        // Convertir los IDs de items a un array de objetos
+        const items = itemsInput.split(',').map(id => ({ id: parseInt(id.trim()) }));
+
+        const newUser = {
+            id: parseInt(id),
+            name,
+            email,
+            items
+        };
+
+        // Verificar si el ID ya existe en la lista
+        if (usersToAdd.some(user => user.id === newUser.id)) {
+            alert('Ya existe un usuario con este ID en la lista');
+            return;
+        }
+
+        usersToAdd.push(newUser);
+        addUserToList(newUser);
+
+        // Limpiar el formulario
+        userForm.reset();
+    });
+
+    // Evento para probar POST /users
+    testPostUsersButton.addEventListener('click', async () => {
+        if (usersToAdd.length === 0) {
+            postUsersResult.textContent = 'Por favor, agrega al menos un usuario';
+            return;
+        }
+
+        try {
+            const response = await fetch('/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usersToAdd)
+            });
+            
+            const data = await response.json();
+            postUsersResult.textContent = JSON.stringify(data, null, 2);
+            console.log('POST /users response:', data);
+
+            // Limpiar la lista después de una respuesta exitosa
+            if (response.status === 201) {
+                usersToAdd.length = 0;
+                usersList.innerHTML = '';
+            }
+        } catch (error) {
+            postUsersResult.textContent = `Error: ${error.message}`;
+            console.error('POST /users error:', error);
+        }
+    });
 }); 
