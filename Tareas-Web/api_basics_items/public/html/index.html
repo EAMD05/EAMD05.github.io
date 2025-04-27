@@ -112,6 +112,52 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>PUT /items/:id</h3>
+            <p>Actualiza un item específico por su ID.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID numérico del item a actualizar</li>
+                <li><strong>name:</strong> Nuevo nombre del item (opcional)</li>
+                <li><strong>type:</strong> Nuevo tipo del item (opcional)</li>
+                <li><strong>effect:</strong> Nuevo efecto del item (opcional)</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Item actualizado correctamente</li>
+                <li><strong>404 Not Found:</strong> Cuando el item no existe</li>
+            </ul>
+            
+            <div class="test-section">
+                <div class="item-form">
+                    <div class="form-group">
+                        <label for="update-item-id">ID del item a actualizar:</label>
+                        <input type="number" id="update-item-id" placeholder="ID del item" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update-item-name">Nuevo nombre:</label>
+                        <input type="text" id="update-item-name" placeholder="Nuevo nombre (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="update-item-type">Nuevo tipo:</label>
+                        <input type="text" id="update-item-type" placeholder="Nuevo tipo (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="update-item-effect">Nuevo efecto:</label>
+                        <input type="text" id="update-item-effect" placeholder="Nuevo efecto (opcional)">
+                    </div>
+                </div>
+
+                <button id="test-put-item" class="test-button">Probar PUT /items/:id</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="PUT-api-items-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

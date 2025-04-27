@@ -169,4 +169,48 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('POST /items error:', error);
         }
     });
+
+    // Prueba para PUT /items/:id
+    const testPutItemButton = document.getElementById('test-put-item');
+    const putItemsResult = document.getElementById('PUT-api-items-result');
+
+    testPutItemButton.addEventListener('click', async () => {
+        const itemId = document.getElementById('update-item-id').value;
+        const name = document.getElementById('update-item-name').value;
+        const type = document.getElementById('update-item-type').value;
+        const effect = document.getElementById('update-item-effect').value;
+
+        if (!itemId) {
+            putItemsResult.textContent = 'Por favor, ingresa un ID válido';
+            return;
+        }
+
+        // Crear objeto con solo los campos que tienen valor
+        const updates = {};
+        if (name) updates.name = name;
+        if (type) updates.type = type;
+        if (effect) updates.effect = effect;
+
+        if (Object.keys(updates).length === 0) {
+            putItemsResult.textContent = 'Por favor, ingresa al menos un campo para actualizar';
+            return;
+        }
+
+        try {
+            const response = await fetch(`/items/${itemId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updates)
+            });
+            
+            const data = await response.json();
+            putItemsResult.textContent = JSON.stringify(data, null, 2);
+            console.log(`PUT /items/${itemId} response:`, data);
+        } catch (error) {
+            putItemsResult.textContent = `Error: ${error.message}`;
+            console.error(`PUT /items/${itemId} error:`, error);
+        }
+    });
 }); 
