@@ -408,4 +408,47 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('POST /users error:', error);
         }
     });
+
+    // Prueba para PUT /users/:id
+    const testPutUserButton = document.getElementById('test-put-user');
+    const putUserResult = document.getElementById('PUT-api-users-result');
+
+    testPutUserButton.addEventListener('click', async () => {
+        const userId = document.getElementById('userId').value;
+        const userName = document.getElementById('userName').value;
+        const userEmail = document.getElementById('userEmail').value;
+        const userItems = document.getElementById('userItems').value;
+
+        if (!userId) {
+            putUserResult.textContent = 'Por favor ingresa un ID de usuario';
+            return;
+        }
+
+        const requestBody = {};
+        if (userName) requestBody.name = userName;
+        if (userEmail) requestBody.email = userEmail;
+        if (userItems) {
+            requestBody.items = userItems.split(',').map(id => parseInt(id.trim()));
+        }
+
+        try {
+            const response = await fetch(`/api/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                putUserResult.textContent = JSON.stringify(data, null, 2);
+            } else {
+                putUserResult.textContent = JSON.stringify(data, null, 2);
+            }
+        } catch (error) {
+            putUserResult.textContent = `Error al realizar la petición: ${error.message}`;
+        }
+    });
 }); 

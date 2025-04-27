@@ -285,6 +285,53 @@
                 </div>
             </div>
         </article>
+
+        <article class="endpoint">
+            <h3>PUT /users/:id</h3>
+            <p>Actualiza un usuario existente por su ID. Solo actualiza los campos proporcionados.</p>
+            
+            <h4>Parámetros:</h4>
+            <ul>
+                <li><strong>id:</strong> ID del usuario a actualizar</li>
+                <li><strong>name:</strong> Nuevo nombre del usuario (opcional)</li>
+                <li><strong>email:</strong> Nuevo email del usuario (opcional)</li>
+                <li><strong>items:</strong> Nueva lista de IDs de items del usuario (opcional)</li>
+            </ul>
+            
+            <h4>Respuestas:</h4>
+            <ul>
+                <li><strong>200 OK:</strong> Usuario actualizado exitosamente</li>
+                <li><strong>400 Bad Request:</strong> Uno o más items no existen</li>
+                <li><strong>404 Not Found:</strong> Usuario no encontrado</li>
+            </ul>
+            
+            <div class="test-section">
+                <div class="user-form">
+                    <div class="form-group">
+                        <label for="userId">ID del usuario a actualizar:</label>
+                        <input type="number" id="userId" placeholder="ID del usuario" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Nuevo nombre:</label>
+                        <input type="text" id="userName" placeholder="Nuevo nombre (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Nuevo email:</label>
+                        <input type="email" id="userEmail" placeholder="Nuevo email (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="userItems">Nuevos items (IDs separados por comas):</label>
+                        <input type="text" id="userItems" placeholder="IDs de items (ej: 1,2,3)">
+                    </div>
+                </div>
+
+                <button id="test-put-user" class="test-button">Probar PUT /users/:id</button>
+                <div class="test-results">
+                    <h4>Resultados de la prueba:</h4>
+                    <pre id="PUT-api-users-result">Ejecutando prueba...</pre>
+                </div>
+            </div>
+        </article>
     </section>
 
     <script src="../js/script.js"></script>

@@ -215,6 +215,43 @@ app.post('/users', (req, res) => {
     }
 });
 
+// PUT /users/:id - Actualizar usuario por ID
+app.put('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const userIndex = mockUsers.findIndex(u => u.id === userId);
+
+    if (userIndex === -1) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    const { name, email, items } = req.body;
+    const updatedUser = { ...mockUsers[userIndex] };
+
+    if (name) {
+        updatedUser.name = name;
+    }
+
+    if (email) {
+        updatedUser.email = email;
+    }
+
+    if (items) {
+        // Verificar que todos los items existan y obtener sus detalles completos
+        const completeItems = [];
+        for (const itemId of items) {
+            const catalogItem = mockItems.find(item => item.id === itemId);
+            if (!catalogItem) {
+                return res.status(400).json({ error: 'One or more items do not exist' });
+            }
+            completeItems.push(catalogItem);
+        }
+        updatedUser.items = completeItems;
+    }
+
+    mockUsers[userIndex] = updatedUser;
+    res.status(200).json(updatedUser);
+});
+
 // Ruta para la página principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
