@@ -35,3 +35,17 @@ app.get('/', (req, res)=>{
     )
 
 })
+
+// Endpoint GET /items
+app.get('/items', (req, res) => {
+    if (items.length === 0) {
+        res.status(404).json({ mensaje: "No hay items disponibles" });
+    } else {
+        res.status(200).json(items);
+    }
+});
+
+// Iniciar el servidor
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
+});

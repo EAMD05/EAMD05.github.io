@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js"></script>
     <title>API Basics Items</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <h1>API Basics Items</h1>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">API Basics Items</h1>
+        </header>
+
+        <main>
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method get">GET</span>
+                    <h2>/items</h2>
+                </div>
+                <button class="button" onclick="getItems()">Probar Endpoint</button>
+                <div class="response" id="itemsResponse">
+                    {/* La respuesta se mostrará aquí */}
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/script.js"></script>
 </body>
 </html> 
