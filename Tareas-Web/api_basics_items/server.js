@@ -138,6 +138,28 @@ app.get('/users', (req, res) => {
     res.status(200).json(usersWithItems);
 });
 
+// Endpoint GET /users/:id
+app.get('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const user = users.find(user => user.id === userId);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    // Expand item details
+    const userItems = user.items.map(itemId => {
+        const item = items.find(i => i.id === itemId);
+        return item || { id: itemId, message: "Item not found" };
+    });
+
+    // Return user data with expanded items
+    res.status(200).json({
+        ...user,
+        items: userItems
+    });
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

@@ -123,6 +123,20 @@
                     {/* Response will be displayed here */}
                 </div>
             </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method get">GET</span>
+                    <h2>/users/:id</h2>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="userId" placeholder="Enter user ID" min="1">
+                    <button class="button" onclick="getUserById(document.getElementById('userId').value)">Test Endpoint</button>
+                </div>
+                <div class="response" id="userByIdResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
         </main>
     </div>
     <script src="../js/script.js"></script>

@@ -239,4 +239,58 @@ async function getUsers() {
     } catch (error) {
         responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
     }
+}
+
+// Test function for GET /users/:id endpoint
+async function testGetUserById() {
+    try {
+        // Test case 1: Valid user ID
+        const validUserId = 1; // Assuming user with ID 1 exists
+        const response1 = await fetch(`http://localhost:3000/users/${validUserId}`);
+        const data1 = await response1.json();
+        console.log('Test case 1 - Valid user ID:');
+        console.log('Status:', response1.status);
+        console.log('Response:', data1);
+
+        // Test case 2: Invalid user ID
+        const invalidUserId = 999; // Assuming this ID doesn't exist
+        const response2 = await fetch(`http://localhost:3000/users/${invalidUserId}`);
+        const data2 = await response2.json();
+        console.log('\nTest case 2 - Invalid user ID:');
+        console.log('Status:', response2.status);
+        console.log('Response:', data2);
+
+    } catch (error) {
+        console.error('Error during testing:', error);
+    }
+}
+
+// Run the tests
+testGetUserById();
+
+// Function to test the GET /users/:id endpoint
+async function getUserById(id) {
+    const responseDiv = document.getElementById('userByIdResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        const response = await fetch(`http://localhost:3000/users/${id}`);
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
 } 
