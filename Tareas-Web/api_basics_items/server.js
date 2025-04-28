@@ -82,6 +82,26 @@ app.post('/items', (req, res) => {
     res.status(201).json({ message: "Item added successfully" });
 });
 
+// Endpoint PUT /items/:id
+app.put('/items/:id', (req, res) => {
+    const itemId = parseInt(req.params.id);
+    const updates = req.body;
+    const itemIndex = items.findIndex(item => item.id === itemId);
+
+    if (itemIndex === -1) {
+        return res.status(404).json({ message: "Item not found" });
+    }
+
+    // Update only the provided fields
+    const updatedItem = { ...items[itemIndex] };
+    if (updates.name) updatedItem.name = updates.name;
+    if (updates.type) updatedItem.type = updates.type;
+    if (updates.effect) updatedItem.effect = updates.effect;
+
+    items[itemIndex] = updatedItem;
+    res.status(200).json({ message: "Item updated" });
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

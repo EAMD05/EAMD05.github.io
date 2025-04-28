@@ -66,6 +66,35 @@
                     {/* Response will be displayed here */}
                 </div>
             </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method put">PUT</span>
+                    <h2>/items/:id</h2>
+                </div>
+                <form onsubmit="handleUpdateItem(event)" class="item-form">
+                    <div class="form-group">
+                        <label for="updateId">ID:</label>
+                        <input type="number" id="updateId" name="updateId" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateName">Name (optional):</label>
+                        <input type="text" id="updateName" name="updateName">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateType">Type (optional):</label>
+                        <input type="text" id="updateType" name="updateType">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateEffect">Effect (optional):</label>
+                        <input type="text" id="updateEffect" name="updateEffect">
+                    </div>
+                    <button type="submit" class="button">Update Item</button>
+                </form>
+                <div class="response" id="updateItemResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
         </main>
     </div>
     <script src="../js/script.js"></script>

@@ -125,5 +125,53 @@ function handlePostItem(event) {
     postItem(itemData);
 }
 
+// Function to test the PUT /items/:id endpoint
+async function updateItem(id, updates) {
+    const responseDiv = document.getElementById('updateItemResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        const response = await fetch(`http://localhost:3000/items/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updates)
+        });
+        
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+}
+
+// Function to handle update form submission
+function handleUpdateItem(event) {
+    event.preventDefault();
+    const form = event.target;
+    const id = parseInt(form.updateId.value);
+    const updates = {};
+    
+    if (form.updateName.value) updates.name = form.updateName.value;
+    if (form.updateType.value) updates.type = form.updateType.value;
+    if (form.updateEffect.value) updates.effect = form.updateEffect.value;
+    
+    updateItem(id, updates);
+}
+
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', getItems); 

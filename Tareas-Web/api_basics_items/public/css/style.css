@@ -82,6 +82,11 @@ body {
     color: #1e40af;
 }
 
+.method.put {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
 .endpoint {
     font-family: monospace;
     background-color: var(--background-color);
