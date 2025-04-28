@@ -173,5 +173,43 @@ function handleUpdateItem(event) {
     updateItem(id, updates);
 }
 
+// Function to test the DELETE /items/:id endpoint
+async function deleteItem(id) {
+    const responseDiv = document.getElementById('deleteItemResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        const response = await fetch(`http://localhost:3000/items/${id}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+}
+
+// Function to handle delete form submission
+function handleDeleteItem(event) {
+    event.preventDefault();
+    const form = event.target;
+    const id = parseInt(form.deleteId.value);
+    deleteItem(id);
+}
+
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', getItems); 

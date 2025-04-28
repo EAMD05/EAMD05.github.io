@@ -87,6 +87,11 @@ body {
     color: #92400e;
 }
 
+.method.delete {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
 .endpoint {
     font-family: monospace;
     background-color: var(--background-color);
@@ -188,4 +193,12 @@ body {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.delete-button {
+    background-color: #ef4444;
+}
+
+.delete-button:hover {
+    background-color: #dc2626;
 } 

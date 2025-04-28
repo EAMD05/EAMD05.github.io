@@ -102,6 +102,20 @@ app.put('/items/:id', (req, res) => {
     res.status(200).json({ message: "Item updated" });
 });
 
+// Endpoint DELETE /items/:id
+app.delete('/items/:id', (req, res) => {
+    const itemId = parseInt(req.params.id);
+    const itemIndex = items.findIndex(item => item.id === itemId);
+
+    if (itemIndex === -1) {
+        return res.status(404).json({ message: "Item not found" });
+    }
+
+    // Remove the item
+    items.splice(itemIndex, 1);
+    res.status(200).json({ message: "Item deleted" });
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

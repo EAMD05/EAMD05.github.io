@@ -95,6 +95,23 @@
                     {/* Response will be displayed here */}
                 </div>
             </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method delete">DELETE</span>
+                    <h2>/items/:id</h2>
+                </div>
+                <form onsubmit="handleDeleteItem(event)" class="item-form">
+                    <div class="form-group">
+                        <label for="deleteId">ID:</label>
+                        <input type="number" id="deleteId" name="deleteId" required min="1">
+                    </div>
+                    <button type="submit" class="button delete-button">Delete Item</button>
+                </form>
+                <div class="response" id="deleteItemResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
         </main>
     </div>
     <script src="../js/script.js"></script>
