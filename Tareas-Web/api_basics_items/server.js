@@ -116,6 +116,28 @@ app.delete('/items/:id', (req, res) => {
     res.status(200).json({ message: "Item deleted" });
 });
 
+// Endpoint GET /users
+app.get('/users', (req, res) => {
+    if (users.length === 0) {
+        return res.status(404).json({ message: "No users available" });
+    }
+
+    // Map users and expand their items
+    const usersWithItems = users.map(user => {
+        const userItems = user.items.map(itemId => {
+            const item = items.find(i => i.id === itemId);
+            return item || { id: itemId, message: "Item not found" };
+        });
+
+        return {
+            ...user,
+            items: userItems
+        };
+    });
+
+    res.status(200).json(usersWithItems);
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

@@ -212,4 +212,31 @@ function handleDeleteItem(event) {
 }
 
 // Call the function when the page loads
-document.addEventListener('DOMContentLoaded', getItems); 
+document.addEventListener('DOMContentLoaded', getItems);
+
+// Function to test the GET /users endpoint
+async function getUsers() {
+    const responseDiv = document.getElementById('usersResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        const response = await fetch('http://localhost:3000/users');
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+} 
