@@ -235,6 +235,22 @@ app.put('/users/:id', (req, res) => {
     res.status(200).json({ message: "User updated" });
 });
 
+// Endpoint DELETE /users/:id
+app.delete('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const userIndex = users.findIndex(user => user.id === userId);
+
+    // Check if user exists
+    if (userIndex === -1) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    // Remove the user from the array
+    users.splice(userIndex, 1);
+    
+    res.status(200).json({ message: "User deleted" });
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

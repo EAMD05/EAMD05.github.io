@@ -441,4 +441,58 @@ function handleUpdateUser(event) {
         const responseDiv = document.getElementById('updateUserResponse');
         responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
     }
+}
+
+// Function to delete a user (DELETE /users/:id)
+async function deleteUser(id) {
+    const responseDiv = document.getElementById('deleteUserResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        console.log(`Deleting user with ID ${id}`); // Debug log
+        
+        const response = await fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+}
+
+// Function to handle delete user form submission
+function handleDeleteUser(event) {
+    event.preventDefault();
+    
+    try {
+        // Get user ID
+        const userId = parseInt(document.getElementById('deleteUserId').value);
+        if (isNaN(userId) || userId <= 0) {
+            throw new Error('Please enter a valid user ID');
+        }
+        
+        // Confirm deletion
+        if (confirm(`Are you sure you want to delete user with ID ${userId}?`)) {
+            deleteUser(userId);
+        }
+        
+    } catch (error) {
+        const responseDiv = document.getElementById('deleteUserResponse');
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
 } 
