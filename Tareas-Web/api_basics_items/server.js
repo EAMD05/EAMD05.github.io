@@ -4,7 +4,7 @@ import express from "express";
 import fs from 'fs';
 import mockItems from './data/mockItems.js';
 import mockUsers from './data/mockUsers.js';
-//import { validateItem, validateUser, isDuplicate } from './data/validators.js';
+import { validateItem, isDuplicate } from './data/validators.js';
 
 const port = 3000;
 const app = express();
@@ -60,6 +60,26 @@ app.get('/items/:id', (req, res) => {
             effect: item.effect
         });
     }
+});
+
+// Endpoint POST /items
+app.post('/items', (req, res) => {
+    const newItem = req.body;
+    
+    // Validate the item
+    const validation = validateItem(newItem);
+    if (!validation.isValid) {
+        return res.status(400).json({ message: validation.message });
+    }
+
+    // Check for duplicate ID
+    if (isDuplicate(items, newItem)) {
+        return res.status(400).json({ message: "Item already exists" });
+    }
+
+    // Add the new item
+    items.push(newItem);
+    res.status(201).json({ message: "Item added successfully" });
 });
 
 // Start the server

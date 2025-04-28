@@ -78,5 +78,52 @@ async function getItemById(id) {
     }
 }
 
+// Function to test the POST /items endpoint
+async function postItem(itemData) {
+    const responseDiv = document.getElementById('postItemResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        const response = await fetch('http://localhost:3000/items', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(itemData)
+        });
+        
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+}
+
+// Function to handle form submission
+function handlePostItem(event) {
+    event.preventDefault();
+    const form = event.target;
+    const itemData = {
+        id: parseInt(form.id.value),
+        name: form.name.value,
+        type: form.type.value,
+        effect: form.effect.value
+    };
+    postItem(itemData);
+}
+
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', getItems); 
