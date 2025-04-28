@@ -4,7 +4,13 @@ import express from "express";
 import fs from 'fs';
 import mockItems from './data/mockItems.js';
 import mockUsers from './data/mockUsers.js';
-import { validateItem, isDuplicate } from './data/validators.js';
+import { 
+    validateItem, 
+    isDuplicate,
+    validateUser,
+    isDuplicateUser,
+    validateUserItems 
+} from './data/validators.js';
 
 const port = 3000;
 const app = express();
@@ -122,12 +128,11 @@ app.get('/users', (req, res) => {
         return res.status(404).json({ message: "No users available" });
     }
 
-    // Map users and expand their items
+    // Map users and expand their items, filtering out non-existent items
     const usersWithItems = users.map(user => {
-        const userItems = user.items.map(itemId => {
-            const item = items.find(i => i.id === itemId);
-            return item || { id: itemId, message: "Item not found" };
-        });
+        const userItems = user.items
+            .map(itemId => items.find(i => i.id === itemId))
+            .filter(item => item !== undefined);
 
         return {
             ...user,
@@ -147,17 +152,41 @@ app.get('/users/:id', (req, res) => {
         return res.status(404).json({ message: "User not found" });
     }
 
-    // Expand item details
-    const userItems = user.items.map(itemId => {
-        const item = items.find(i => i.id === itemId);
-        return item || { id: itemId, message: "Item not found" };
-    });
+    // Expand item details and filter out non-existent items
+    const userItems = user.items
+        .map(itemId => items.find(i => i.id === itemId))
+        .filter(item => item !== undefined);
 
     // Return user data with expanded items
     res.status(200).json({
         ...user,
         items: userItems
     });
+});
+
+// Endpoint POST /users
+app.post('/users', (req, res) => {
+    const newUser = req.body;
+
+    // Validate the user
+    const validation = validateUser(newUser);
+    if (!validation.isValid) {
+        return res.status(400).json({ message: "Incomplete data or item does not exist" });
+    }
+
+    // Check for duplicate ID
+    if (isDuplicateUser(users, newUser)) {
+        return res.status(400).json({ message: "Incomplete data or item does not exist" });
+    }
+
+    // Validate that all item IDs exist
+    if (!validateUserItems(items, newUser.items)) {
+        return res.status(400).json({ message: "Incomplete data or item does not exist" });
+    }
+
+    // Add the new user
+    users.push(newUser);
+    res.status(201).json({ message: "User added successfully" });
 });
 
 // Start the server

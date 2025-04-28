@@ -293,4 +293,66 @@ async function getUserById(id) {
     } catch (error) {
         responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
     }
+}
+
+// Function to handle POST /users form submission
+async function handlePostUser(event) {
+    event.preventDefault();
+    const responseDiv = document.getElementById('postUserResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        // Get form values
+        const userId = parseInt(document.getElementById('createUserId').value);
+        const userName = document.getElementById('userName').value.trim();
+        const userEmail = document.getElementById('userEmail').value.trim();
+        const userItemsInput = document.getElementById('userItems').value.trim();
+        
+        // Validate and process items
+        const userItems = userItemsInput
+            .split(',')
+            .map(id => parseInt(id.trim()))
+            .filter(id => !isNaN(id));
+
+        if (userItems.length === 0) {
+            throw new Error('Please enter valid item IDs');
+        }
+
+        // Create user object
+        const userData = {
+            id: userId,
+            name: userName,
+            email: userEmail,
+            items: userItems
+        };
+
+        console.log('Sending user data:', userData); // Debug log
+
+        // Send POST request
+        const response = await fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
 } 

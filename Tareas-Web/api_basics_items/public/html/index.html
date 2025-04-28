@@ -137,6 +137,35 @@
                     {/* Response will be displayed here */}
                 </div>
             </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method post">POST</span>
+                    <h2>/users</h2>
+                </div>
+                <form onsubmit="handlePostUser(event)" class="user-form">
+                    <div class="form-group">
+                        <label for="createUserId">ID:</label>
+                        <input type="number" id="createUserId" name="userId" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Name:</label>
+                        <input type="text" id="userName" name="userName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email:</label>
+                        <input type="email" id="userEmail" name="userEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userItems">Items (comma-separated IDs):</label>
+                        <input type="text" id="userItems" name="userItems" required placeholder="1,2,3">
+                    </div>
+                    <button type="submit" class="button">Add User</button>
+                </form>
+                <div class="response" id="postUserResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
         </main>
     </div>
     <script src="../js/script.js"></script>
