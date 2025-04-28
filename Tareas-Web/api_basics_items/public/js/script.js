@@ -355,4 +355,90 @@ async function handlePostUser(event) {
     } catch (error) {
         responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
     }
+}
+
+// Function to update a user (PUT /users/:id)
+async function updateUser(id, updates) {
+    const responseDiv = document.getElementById('updateUserResponse');
+    responseDiv.innerHTML = 'Loading...';
+    
+    try {
+        console.log(`Updating user with ID ${id}:`, updates); // Debug log
+        
+        const response = await fetch(`http://localhost:3000/users/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updates)
+        });
+        
+        const data = await response.json();
+        
+        // Create status element
+        const statusElement = document.createElement('span');
+        statusElement.className = `status ${response.ok ? 'success' : 'error'}`;
+        statusElement.textContent = `Status: ${response.status}`;
+        
+        // Display formatted response
+        responseDiv.innerHTML = '';
+        responseDiv.appendChild(statusElement);
+        
+        const preElement = document.createElement('pre');
+        preElement.textContent = JSON.stringify(data, null, 2);
+        responseDiv.appendChild(preElement);
+        
+    } catch (error) {
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
+}
+
+// Function to handle update user form submission
+function handleUpdateUser(event) {
+    event.preventDefault();
+    
+    try {
+        // Get user ID
+        const userId = parseInt(document.getElementById('updateUserId').value);
+        if (isNaN(userId) || userId <= 0) {
+            throw new Error('Please enter a valid user ID');
+        }
+        
+        // Get optional form values
+        const updates = {};
+        
+        const userName = document.getElementById('updateUserName').value.trim();
+        if (userName) {
+            updates.name = userName;
+        }
+        
+        const userEmail = document.getElementById('updateUserEmail').value.trim();
+        if (userEmail) {
+            updates.email = userEmail;
+        }
+        
+        const userItemsInput = document.getElementById('updateUserItems').value.trim();
+        if (userItemsInput) {
+            const userItems = userItemsInput
+                .split(',')
+                .map(id => parseInt(id.trim()))
+                .filter(id => !isNaN(id));
+                
+            if (userItems.length > 0) {
+                updates.items = userItems;
+            }
+        }
+        
+        // Check if any updates were provided
+        if (Object.keys(updates).length === 0) {
+            throw new Error('Please provide at least one field to update');
+        }
+        
+        // Send the update request
+        updateUser(userId, updates);
+        
+    } catch (error) {
+        const responseDiv = document.getElementById('updateUserResponse');
+        responseDiv.innerHTML = `<span class="status error">Error: ${error.message}</span>`;
+    }
 } 

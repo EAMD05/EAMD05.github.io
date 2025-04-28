@@ -167,7 +167,7 @@ app.get('/users/:id', (req, res) => {
 // Endpoint POST /users
 app.post('/users', (req, res) => {
     const newUser = req.body;
-
+    
     // Validate the user
     const validation = validateUser(newUser);
     if (!validation.isValid) {
@@ -187,6 +187,52 @@ app.post('/users', (req, res) => {
     // Add the new user
     users.push(newUser);
     res.status(201).json({ message: "User added successfully" });
+});
+
+// Endpoint PUT /users/:id
+app.put('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const updates = req.body;
+    const userIndex = users.findIndex(user => user.id === userId);
+
+    // Check if user exists
+    if (userIndex === -1) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    // Create a copy of the current user to update
+    const updatedUser = { ...users[userIndex] };
+    
+    // Update name if provided
+    if (updates.name) {
+        updatedUser.name = updates.name;
+    }
+    
+    // Update email if provided
+    if (updates.email) {
+        updatedUser.email = updates.email;
+    }
+    
+    // Update items if provided
+    if (updates.items) {
+        // Convert items to array if it's a string
+        let newItems = updates.items;
+        if (typeof newItems === 'string') {
+            newItems = newItems.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id));
+        }
+        
+        // Validate that all item IDs exist
+        if (!validateUserItems(items, newItems)) {
+            return res.status(400).json({ message: "One or more items do not exist" });
+        }
+        
+        updatedUser.items = newItems;
+    }
+    
+    // Update the user in the array
+    users[userIndex] = updatedUser;
+    
+    res.status(200).json({ message: "User updated" });
 });
 
 // Start the server

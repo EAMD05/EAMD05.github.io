@@ -166,6 +166,35 @@
                     {/* Response will be displayed here */}
                 </div>
             </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method put">PUT</span>
+                    <h2>/users/:id</h2>
+                </div>
+                <form onsubmit="handleUpdateUser(event)" class="user-form">
+                    <div class="form-group">
+                        <label for="updateUserId">ID:</label>
+                        <input type="number" id="updateUserId" name="updateUserId" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateUserName">Name (optional):</label>
+                        <input type="text" id="updateUserName" name="updateUserName">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateUserEmail">Email (optional):</label>
+                        <input type="email" id="updateUserEmail" name="updateUserEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateUserItems">Items (optional, comma-separated IDs):</label>
+                        <input type="text" id="updateUserItems" name="updateUserItems" placeholder="1,2,3">
+                    </div>
+                    <button type="submit" class="button">Update User</button>
+                </form>
+                <div class="response" id="updateUserResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
         </main>
     </div>
     <script src="../js/script.js"></script>
