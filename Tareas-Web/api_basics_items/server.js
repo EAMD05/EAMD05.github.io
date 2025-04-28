@@ -45,6 +45,23 @@ app.get('/items', (req, res) => {
     }
 });
 
+// Endpoint GET /items/:id
+app.get('/items/:id', (req, res) => {
+    const itemId = parseInt(req.params.id);
+    const item = items.find(item => item.id === itemId);
+
+    if (!item) {
+        res.status(404).json({ message: "Item not found" });
+    } else {
+        res.status(200).json({
+            id: item.id,
+            name: item.name,
+            type: item.type,
+            effect: item.effect
+        });
+    }
+});
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

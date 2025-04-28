@@ -12,7 +12,7 @@
             <h1 class="title">API Basics Items</h1>
         </header>
 
-        <main>
+        <main class="endpoints-container">
             <section class="api-section">
                 <div class="section-title">
                     <span class="method get">GET</span>
@@ -20,6 +20,20 @@
                 </div>
                 <button class="button" onclick="getItems()">Test Endpoint</button>
                 <div class="response" id="itemsResponse">
+                    {/* Response will be displayed here */}
+                </div>
+            </section>
+
+            <section class="api-section">
+                <div class="section-title">
+                    <span class="method get">GET</span>
+                    <h2>/items/:id</h2>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="itemId" placeholder="Enter item ID" min="1">
+                    <button class="button" onclick="getItemById(document.getElementById('itemId').value)">Test Endpoint</button>
+                </div>
+                <div class="response" id="itemByIdResponse">
                     {/* Response will be displayed here */}
                 </div>
             </section>
